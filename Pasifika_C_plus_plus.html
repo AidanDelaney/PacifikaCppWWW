@@ -1,0 +1,1368 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta http-equiv="Content-Style-Type" content="text/css" />
+  <meta name="generator" content="pandoc" />
+  <meta name="author" content="Aidan Delaney" />
+  <meta name="author" content="Allen B. Downey" />
+  <meta name="author" content="Narendra Sisodiya" />
+  <meta name="author" content="Tirtha P. Chatterjee" />
+  <title>Pasifika C++</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_CHTML-full" type="text/javascript"></script>
+</head>
+<body>
+<div id="header">
+<h1 class="title">Pasifika C++</h1>
+<h2 class="author">Aidan Delaney</h2>
+<h2 class="author">Allen B. Downey</h2>
+<h2 class="author">Narendra Sisodiya</h2>
+<h2 class="author">Tirtha P. Chatterjee</h2>
+</div>
+<div id="TOC">
+<ul>
+<li><a href="#introduction"><span class="toc-section-number">1</span> Introduction</a><ul>
+<li><a href="#objective"><span class="toc-section-number">1.1</span> Objective</a></li>
+<li><a href="#background"><span class="toc-section-number">1.2</span> Background</a></li>
+<li><a href="#what-is-programming"><span class="toc-section-number">1.3</span> What is Programming</a><ul>
+<li><a href="#formalisation"><span class="toc-section-number">1.3.1</span> Formalisation</a></li>
+</ul></li>
+<li><a href="#what-can-computers-do"><span class="toc-section-number">1.4</span> What can Computers Do?</a></li>
+<li><a href="#what-computers-cant-do"><span class="toc-section-number">1.5</span> What Computers Can't Do</a></li>
+<li><a href="#why-c"><span class="toc-section-number">1.6</span> Why C++</a></li>
+<li><a href="#what-we-can-do-now"><span class="toc-section-number">1.7</span> What we can do now</a></li>
+</ul></li>
+<li><a href="#hello-world"><span class="toc-section-number">2</span> Hello World</a><ul>
+<li><a href="#objective-1"><span class="toc-section-number">2.1</span> Objective</a></li>
+<li><a href="#the-console"><span class="toc-section-number">2.2</span> The Console</a></li>
+<li><a href="#first-program"><span class="toc-section-number">2.3</span> First Program</a><ul>
+<li><a href="#a-stylistic-note-on-whitespace"><span class="toc-section-number">2.3.1</span> A Stylistic Note on Whitespace</a></li>
+</ul></li>
+<li><a href="#what-we-can-now-do"><span class="toc-section-number">2.4</span> What we can now do</a></li>
+</ul></li>
+<li><a href="#int-and-other-types"><span class="toc-section-number">3</span> <code>int</code> and Other Types</a><ul>
+<li><a href="#objective-2"><span class="toc-section-number">3.1</span> Objective</a></li>
+<li><a href="#simple-types"><span class="toc-section-number">3.2</span> Simple Types</a></li>
+<li><a href="#type-errors"><span class="toc-section-number">3.3</span> Type Errors</a></li>
+<li><a href="#storage-boxes"><span class="toc-section-number">3.4</span> Storage Boxes</a></li>
+<li><a href="#what-we-can-now-do-1"><span class="toc-section-number">3.5</span> What we can now do</a></li>
+</ul></li>
+<li><a href="#functions"><span class="toc-section-number">4</span> Functions</a><ul>
+<li><a href="#objective-3"><span class="toc-section-number">4.1</span> Objective</a></li>
+<li><a href="#simple-functions"><span class="toc-section-number">4.2</span> Simple Functions</a></li>
+<li><a href="#signature-before-use"><span class="toc-section-number">4.3</span> Signature before use</a></li>
+<li><a href="#multiple-parameters"><span class="toc-section-number">4.4</span> Multiple Parameters</a></li>
+<li><a href="#testing-functions"><span class="toc-section-number">4.5</span> Testing Functions</a><ul>
+<li><a href="#test-harness"><span class="toc-section-number">4.5.1</span> Test Harness</a></li>
+</ul></li>
+<li><a href="#void-return"><span class="toc-section-number">4.6</span> <code>void</code> return</a></li>
+<li><a href="#what-we-can-now-do-2"><span class="toc-section-number">4.7</span> What we can now do</a></li>
+</ul></li>
+<li><a href="#input-and-output"><span class="toc-section-number">5</span> Input and Output</a><ul>
+<li><a href="#objective-4"><span class="toc-section-number">5.1</span> Objective</a></li>
+<li><a href="#output"><span class="toc-section-number">5.2</span> Output</a></li>
+<li><a href="#input"><span class="toc-section-number">5.3</span> Input</a></li>
+<li><a href="#testing-input"><span class="toc-section-number">5.4</span> Testing Input</a></li>
+<li><a href="#what-we-can-now-do-3"><span class="toc-section-number">5.5</span> What we can now do</a></li>
+</ul></li>
+<li><a href="#branching-computation"><span class="toc-section-number">6</span> Branching Computation</a><ul>
+<li><a href="#objective-5"><span class="toc-section-number">6.1</span> Objective</a></li>
+<li><a href="#static-structure"><span class="toc-section-number">6.2</span> Static Structure</a></li>
+<li><a href="#tracing-execution"><span class="toc-section-number">6.3</span> Tracing Execution</a></li>
+<li><a href="#conditional-execution"><span class="toc-section-number">6.4</span> Conditional execution</a></li>
+<li><a href="#alternative-execution"><span class="toc-section-number">6.5</span> Alternative execution</a></li>
+<li><a href="#what-we-can-now-do-4"><span class="toc-section-number">6.6</span> What we can now do</a></li>
+</ul></li>
+<li><a href="#iteration"><span class="toc-section-number">7</span> Iteration</a><ul>
+<li><a href="#objective-6"><span class="toc-section-number">7.1</span> Objective</a></li>
+<li><a href="#multiple-assignment"><span class="toc-section-number">7.2</span> Multiple assignment</a></li>
+<li><a href="#iteration-1"><span class="toc-section-number">7.3</span> Iteration</a><ul>
+<li><a href="#the-while-statement"><span class="toc-section-number">7.3.1</span> The <code>while</code> statement</a></li>
+</ul></li>
+<li><a href="#for-loops"><span class="toc-section-number">7.4</span> <code>for</code> loops</a></li>
+<li><a href="#what-we-can-now-do-5"><span class="toc-section-number">7.5</span> What we can now do</a></li>
+</ul></li>
+<li><a href="#lists"><span class="toc-section-number">8</span> Lists</a><ul>
+<li><a href="#objective-7"><span class="toc-section-number">8.1</span> Objective</a></li>
+<li><a href="#a-vector"><span class="toc-section-number">8.2</span> A <code>vector</code></a></li>
+<li><a href="#accessing-elements"><span class="toc-section-number">8.3</span> Accessing elements</a></li>
+<li><a href="#better-iteration"><span class="toc-section-number">8.4</span> Better Iteration</a></li>
+<li><a href="#copying-vectors"><span class="toc-section-number">8.5</span> Copying vectors</a></li>
+<li><a href="#vector-size"><span class="toc-section-number">8.6</span> Vector size</a></li>
+<li><a href="#vector-functions"><span class="toc-section-number">8.7</span> Vector functions</a></li>
+<li><a href="#what-we-can-now-do-6"><span class="toc-section-number">8.8</span> What we can now do</a></li>
+</ul></li>
+<li><a href="#random-numbers"><span class="toc-section-number">9</span> Random numbers</a><ul>
+<li><a href="#objective-8"><span class="toc-section-number">9.1</span> Objective</a></li>
+<li><a href="#determinsm"><span class="toc-section-number">9.2</span> Determinsm</a></li>
+<li><a href="#statistics"><span class="toc-section-number">9.3</span> Statistics</a><ul>
+<li><a href="#vector-of-random-numbers"><span class="toc-section-number">9.3.1</span> Vector of random numbers</a></li>
+<li><a href="#counting"><span class="toc-section-number">9.3.2</span> Counting</a></li>
+<li><a href="#checking-the-other-values"><span class="toc-section-number">9.3.3</span> Checking the other values</a></li>
+<li><a href="#a-histogram"><span class="toc-section-number">9.3.4</span> A histogram</a></li>
+<li><a href="#a-single-pass-solution"><span class="toc-section-number">9.3.5</span> A single-pass solution</a></li>
+</ul></li>
+<li><a href="#random-seeds"><span class="toc-section-number">9.4</span> Random seeds</a></li>
+<li><a href="#what-we-can-do-now-1"><span class="toc-section-number">9.5</span> What we can do now</a></li>
+</ul></li>
+<li><a href="#provenance"><span class="toc-section-number">10</span> Provenance</a><ul>
+<li><a href="#licence"><span class="toc-section-number">10.1</span> Licence</a></li>
+<li><a href="#gnu-general-public-license"><span class="toc-section-number">10.2</span> GNU GENERAL PUBLIC LICENSE</a><ul>
+<li><a href="#preamble"><span class="toc-section-number">10.2.1</span> Preamble</a></li>
+<li><a href="#terms-and-conditions-for-copying-distribution-and-modification"><span class="toc-section-number">10.2.2</span> TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION</a></li>
+<li><a href="#no-warranty"><span class="toc-section-number">10.2.3</span> NO WARRANTY</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+<h1 id="introduction"><span class="header-section-number">1</span> Introduction</h1>
+<h2 id="objective"><span class="header-section-number">1.1</span> Objective</h2>
+<p>In this chapter we motivate why we study computer programming.</p>
+<h2 id="background"><span class="header-section-number">1.2</span> Background</h2>
+<p>There are a lot of interesting things out there in the world. You could learn about <a href="https://en.wikipedia.org/wiki/Magic_realism">magical realism</a> in literature from <a href="https://en.wikipedia.org/wiki/Jorge_Luis_Borges">Borges'</a> writings through to <a href="https://en.wikipedia.org/wiki/Guillermo_del_Toro">Del Toro's</a> excellent movie <a href="https://en.wikipedia.org/wiki/Pan%27s_Labyrinth">Pan's Labyrinth</a>. Or maybe you're interested in how <a href="https://en.wikipedia.org/wiki/Albert_Einstein">Einstein's</a> theories of relativity led to <a href="https://en.wikipedia.org/wiki/Quantum_mechanics">Quantum Mechanics</a>. Amidst all of these interesting topics why choose to study computer programming? I have multiple, and sometimes contradictory views, on why I like programming. It's essentially reductionist, to do it correctly requires great social skills and it represents about 50% of my daily universe. I'll explain each of these claims in turn.</p>
+<p>Computer programming is reductionist. We study a problem and reduce the problem to it's bare bones. As an example, we reduce everything to numbers -- we can't represent the depth and breadth how much you might love a pet, but we can represent it on a scale from 0 to 100! After reducing the problem, we then produce a computer program that solves the problem from very basic components. Each time you write a program it's like walking into a workshop containing a bunch of steel pipes and a furnace and being told that you have to build a motorbike. We generally look a problems from the bottom-up; how can we solve the problem with the small number of components that are available to us.</p>
+<p>By contrast, the people who want us to write programs -- employers, family, friends and wider society -- look at things from a top-down perspective. They need to automate some systems in order to solve a real-world problem. Your employer might want a program to calculate their annual tax bill, and then automatically transfer the tax payment directly to the tax authorities<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>. The perspectives of such stakeholders is almost the opposite of reductionist. It requires thinking about an entire system. Moreover solving real-world problems develops excellent communication skills in order to tease out the real issues the stakeholder wants to solve. Often stakeholders ask for a program to do X when they really want to solve problem Y. Programmers have their own language for describing such things. We call it the <a href="https://en.wikipedia.org/wiki/XY_problem">XY Problem</a>.</p>
+<p>So far we've considered a reductionist bottom-up reason to study programming. We've also briefly discussed how you also how programming can help you to develop great communication skills. My third reason for studying programming is an argument made by <a href="https://en.wikipedia.org/wiki/Simon_Peyton_Jones">Simon Peyton Jones</a>. He argues that in the 20<sup>th</sup> Century we introduced the natural sciences into schools -- that is physics, chemistry and biology -- so that all adults would have a good understanding of the physical world in which we live. In the 21<sup>st</sup> Century we live much of our day outside the physical world and inside the virtual world<a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a>. Many of our relationships are mediated by social networks -- I have good friends who I've never seen. Other simple things in life are also digital, bank transfers can be organised through a web browser and avoid standing in line in a physical bank. There are growing trends where we use software to solve transport issues, negating the reasons to cough up $14k on a second-hand Toyota. The virtual world has such a huge impact on our real-world that it is useful to study programming so that we can understand the building blocks of the virtual world.</p>
+<p>So there are three reasons to study programming; the first because it's a big box of lego from which you can build really interesting things, the second because it solves interesting (and not so interesting) real-world problems that require a lot of communication and the third reason is because it give you a good understanding of the virtual universe in which we spend much of our daily life.</p>
+<h2 id="what-is-programming"><span class="header-section-number">1.3</span> What is Programming</h2>
+<p>If you're still reading you're either convinced by one of my three reasons for studying programming or you need the course credit given by passing a programming class. Hopefully it's the former as intrinsic motivation is more likely to drive you to success than extrinsic motivation. In both cases you know why you're studying programming, the question now becomes &quot;what is programming?&quot;.</p>
+<p>In one view, a program is an <em>unambiguous</em> list of instructions. Each time you follow the list of instructions, you will achieve the same result. The comparison is often made with cooking, where recipes are often shared as a list of instructions. Take for example the instructions for making a chicken lovo or umu. In the case of lovo you might get the instructions to:</p>
+<ol style="list-style-type: decimal">
+<li>Dig a pit,</li>
+<li>Build a fire,</li>
+<li>Carefully place lava rocks over the fire,</li>
+<li>Light the fire and let it burn down to embers,</li>
+<li>Season the chicken,</li>
+<li>Wrap the chicken in banana leaves,</li>
+<li>Put the wrapped chicken on the hot stones,</li>
+<li>Cover the food with earth</li>
+<li>Wait 2 hours, remove chicken and eat!</li>
+</ol>
+<p>To most people, the above instructions are enough to make a great dinner. However these instructions are ambiguous. They don't say how deep or wide to build the pit. They don't say how high the fire should be within the pit. How large should the lava rocks be? Or what do we season the chicken with? Moreover, if you've ever made a lovo or umu you know it's a lot of effort. Too much effort to cook a single chicken so maybe we should also place <a href="http://en.wikipedia.org/wiki/taro">taro</a> and fish alongside the chicken. The reason that the instructions can be ambiguous is because you, dear reader, are intelligent enough to fill in the blanks.</p>
+<p>Computers, of course, are not intelligent. They cannot fill in any blanks in an explanation. So we need to present them with a list of instructions written in an unambiguous language. The process of producing unambiguous explanations is called <em>proof</em> by mathematicians, but we'll call it <em>programming</em>.</p>
+<h3 id="formalisation"><span class="header-section-number">1.3.1</span> Formalisation</h3>
+<p>In order to remove ambiguity from the interpretation of sentences we're going to abandon the use of natural language. We won't try to write our instructions in English, French or Bislama. These are fantastic languages in which to express love or revolution. However, the very fact that these languages allow us to express and discuss poorly defined concepts is the very reason that they are unsuitable for providing unambiguous instructions to a machine. To program a computer we need a formal language, one in which each word and sentence has a well-defined meaning.</p>
+<p>By writing instructions in a formal language we remove ambiguity from the instructions. It's also important to note that we also loose something in translation. A bunch of instructions that describe making a traditional lovo can be read and understood by any literate person. Lovo instructions written in an unambiguous language are likely to be very difficult to read. In order to illustrate this I need to introduce a problem that is much more straightforward than making a lovo. Let's consider the kids game <em>hangman</em>.</p>
+<p>The game <em>hangman</em> is played by kids in schools all over the world. One student chooses a secret word and writes a number of dashes on a piece of paper. There is one dash for each letter of the secret word. The same person also draws a gallows<a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a>. A friend then guesses letters of the secret word. If they correctly guess a letter of the word then the letter is written on a dash in an appropriate position. If they do not guess correctly then a bit of a stick man is drawn hung on the gallows. The friend wins the game if they correctly reveal all the letters of the word before the full stick man is drawn on the page.</p>
+<p>Our previous paragraph is a reasonable explanation of the game. Again, like our lovo example, you're probably able to fill in the bits where I've explained it poorly. What if we had to write the instructions of the game in a way that they couldn't be misinterpreted? Legal people commonly write such instructions:</p>
+<blockquote>
+<blockquote>
+<p>The game of hangman, herein referred to as THE GAME, is a game for two parties referred to as THE PLAYER and THE JUDGE.</p>
+<ol style="list-style-type: lower-alpha">
+<li>THE JUDGE will draw on paper a gallows and below the gallows a series of dashes where there is one dash for each letter of a secret word.
+<ul>
+<li>THE JUDGE will not prima-facia reveal the secret word to THE PLAYER</li>
+</ul></li>
+<li>THE PLAYER will guess a letter of the secret word and
+<ul>
+<li>if the guessed letter is one or more letters in the secret word, then THE JUDGE writes the guessed letters on top of a dash that is at the same position in the series as the guessed letter in the secret word.</li>
+<li>otherwise THE JUDGE will draw the next body part of a stick man on the gallows.</li>
+</ul></li>
+<li>the body parts of a stick man are drawn in progression, on per turn, starting with a head, a body, a left leg, a right leg, a left arm and a right arm.</li>
+<li>THE JUDGE wins the game if the stick man is drawn before the secret word is revealed.</li>
+</ol>
+</blockquote>
+</blockquote>
+<p>The legal code for <em>hangman</em> is useful when two players need to argue about the implementation of a rule. We can still argue about the interpretation of some of the rules; should the judge draw the arm as an upper arm and lower arm? Can the player guess two letters at a time?<a href="#fn4" class="footnoteRef" id="fnref4"><sup>4</sup></a> In our case we want our rule to be interpreted by a machine that can't argue about how to implement a rule. We know our machines have no intelligence. They can simply replace symbols with other symbols</p>
+<!--- I take a slightly different view of programming from many other texts.  Often a program is seen as the object we want to produce.  By contrast, I see it as an artefact of the production process.  The reality of programming is that we get a bunch of smart people together in order to write a solution to a problem in an unambiguous language.  Under this interpretation the program itself is a difficult-to-read document that explains how the development team understand the problem. -->
+<p>Hopefully you now agree that our natural languages, even when restricted to legal language, are not precise enough to instruct a dumb computer. We need languages that are un-natural. We need formal languages that are suited to describing how to manipulate symbols and &quot;move&quot; symbols around. Such a language is going to be difficult to read because of its lack of expressiveness. It doesn't have the expressive <em>bandwidth</em> of a natural language.</p>
+<p>In a more formal language designed for computation -- a <strong>programming language</strong> -- we have to write a lot of instructions to describe hangman. The instructions might look something like:</p>
+<pre><code>start program
+run instructions to construct gallows
+run instructions to input secret word
+repeat run instructions to take a turn until the game is over
+end program
+
+instructions to take a turn
+ask the player to input a single character
+read in a single character
+if the single character is in the secret word
+then run instructions to uncover characters
+otherwise run instructions to draw next stroke
+end instructions to take a turn</code></pre>
+<p>I've omitted a <em>lot</em> of detail above in order to make it readable. I've also kept my example formal language as close to English as possible. In the C++ programming language the code to <code>start program</code> and <code>run instructions to construct gallows</code> might look like :</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">int</span> main() {
+  construct_gallows();
+}</code></pre></div>
+<p>It's a lot more compact than my English-like language. It is also much more difficult to read. We want to learn C++, which I'll delve into below, but first we'll look at what computers can do in order to better motivate why we want to learn such a precise language<a href="#fn5" class="footnoteRef" id="fnref5"><sup>5</sup></a>.</p>
+<h2 id="what-can-computers-do"><span class="header-section-number">1.4</span> What can Computers Do?</h2>
+<p>It's obvious that a computer can't cook a lovo. So why should we bother devising instructions for them in complicated looking formal languages? Simply put, computers are insanely quick at performing mathematical operations. So if you can formalise the solution to your problem in terms of mathematical operations then a computer can solve it quickly. As an example, there are around 3000 staff at the University of the South Pacific. To calculate the monthly pay packet for a staff member might take a clerical assistant about a minute or two, which is roughly a week of work in total. A computer can perform the same functions in less than a second. Moreover, if the instructions given to the computer are correct, then the computer will not make a mistake on any pay packet. From an organisational point of view this allows us to free staff from boring repetitive work. We can then use those staff for tasks that humans are better suited to, such as teaching or research.</p>
+<p>The example of calculating pay packets demonstrates how completing mathematical operations quickly is of use. Some other uses of computers are less clear. Consider the last movie you watched on a computer. The movie is stored in a file. The file is a sequence of numbers that, roughly speaking, can be interpreted as 25 pictures per second. Each picture states the colour of pixels on the screen. The act of watching the movie requires a program that interprets the data file and plays the 25 pictures per second on your screen. Again, we're only using mathematical operations to calculate colour values and moving symbols around inside the memory of the computer.</p>
+<p>You might not consider the fuel injector of a boat engine to be a job best handled by a computer. It is the case though that all modern engines use a computer, referred to as the <a href="https://en.wikipedia.org/wiki/Engine_control_unit"><em>engine control unit</em></a>. The job of the engine control unit is often to control the timing of firing each cylinder in the engine. In many cases the control unit can read a stream of numbers provided to it from the engine exhaust and adjust the engine to run within pre-determined environmental limits. One practical outcome of this approach is a reduction in the amount of fuel used by an engine. This is something that is simply impractical to achieve without a computer in control.</p>
+<p>So we know that computers are useful for movie night and driving to the movies. You can find other applications of computers in medical devices and -- obviously -- in mobile phones and running the entire Internet! We know that computers can do a lot, leading to the interesting question asking whether there are things that computers can't do?</p>
+<h2 id="what-computers-cant-do"><span class="header-section-number">1.5</span> What Computers Can't Do</h2>
+<p>Computers can be used to solve many problems. Are there problems that computers can't solve? The short answer is &quot;yes&quot;, but a longer answer is more interesting. The idea of a computer was defined in 1936 by the mathematician <a href="http://en.wikipedia.org/wiki/Alan_Turing">Alan Turing</a>. His idea has three very practical consequences:</p>
+<ol style="list-style-type: decimal">
+<li>If it can't be formalised then it can't be computed,</li>
+<li>There are some formalised problems that can't be computed,</li>
+<li>There are a large number of practical problems that can be computed but take too long to compute.</li>
+</ol>
+<p>The first is a fairly obvious consequence of the previous discussion on formalisation. Humans can't seem to agree on a definition of <em>love</em> or even of what good music is. As these ideas can't be formalised in our formal language, then they can't be computed. The second point is not obvious and was the central point of Turing's <a href="http://www.turingarchive.org/browse.php/B/12">definition of computing</a>. There are problems that can be formalised but cannot be computed on a computer. One of these is the measure of <a href="https://en.wikipedia.org/wiki/Kolmogorov_complexity">minimum amount of information</a> necessary to construct an original information source. You've probably used an approximation to this measurement. The <code>.zip</code> file format stores information compressed by an algorithm that approximates this problem. We can't give you the very smallest <code>.zip</code> file that represents your original information but we can give you a good guess at it.</p>
+<p>The third consequence is again non-obvious but you use it every single day. Almost all encryption on the web, that is <code>HTTPS</code> traffic, is based on a problem that can be computed but simply takes too long to reverse. Another problem, called the <a href="https://en.wikipedia.org/wiki/Travelling_Salesman_Problem">travelling salesperson problem</a> (TSP), also illustrates how some computable problems take too long to compute. The TSP asks us to compute the quickest way to visit all USP campuses. USP has a on campus in Suva, Lautoka and Labasa in Fiji, it takes 3 hours to travel between Suva and Lautoka, 16 hours to travel between Suva and Labasa and 26 hours to travel between Lautoka and Labasa, this is visualised in figure {<span class="citation">@fig:tsp</span>}.</p>
+<div class="figure">
+<img src="images/tsp.png" alt="The travelling salesperson problem" id="fig:tsp" />
+<p class="caption">The travelling salesperson problem</p>
+</div>
+<p>I've turned the statement of the problem into a graph. This makes it a bit easier to focus on the actual problem, not on details such as exactly how we get from Suva to Lautoka. Given this kind of graph the TSP asks what is the shortest path in the graph that passes through all campuses? We can start in Suva and end in Lautoka or we can start in Lebasa and end in Suva. In this graph there are 3 combinations<a href="#fn6" class="footnoteRef" id="fnref6"><sup>6</sup></a> of starting and ending points:</p>
+<ol style="list-style-type: decimal">
+<li>Suva to Lautoka (via Lebasa),</li>
+<li>Suva to Lebasa (via Lautoka), and</li>
+<li>Lautoka to Lebasa (via Suva).</li>
+</ol>
+<p>For 3 campuses it's easy to work out which is the shortest route through all. You can probably do it in your head. As we in more campuses, say Port Vila in Vanuatu and Apia in Samoa, we find that the number of combinations is huge. Computer Scientists<a href="#fn7" class="footnoteRef" id="fnref7"><sup>7</sup></a> have worked out that for 5 campuses there are <span class="math inline">\(5^2 \times 2^5\)</span> routes to calculate, that's <span class="math inline">\(800\)</span> routes to calculate in total. If we make an assumption that it takes 1 micro second to calculate a route then, for 5 campuses, it takes less than a second to find the cost of all routes. That's great and much quicker than a human could do it.</p>
+<p>Keep in mind I said that this problem takes a long time to compute. It appears that so-far I've not been telling the truth. Suppose then that we add in all the USP campuses and the costs of travelling (in time) between each campus. There is one campus in each of 11 countries and then 3 campuses in Fiji, a grand total of 14. Just for fun we can also add in the University of Auckland as I have some research colleagues there and Université de la Nouvelle-Calédonie because that covers all the teams that play in the Suva 7's Rugby tournament. For <span class="math inline">\(16\)</span> campuses of various universities there are a lot of routes to calculate:</p>
+<p><span class="math display">\[
+16^2\times 2^{16} = 16777216.
+\]</span></p>
+<p>If we make the same assumption that a route costs 1 micro second to calculate then it will take 16777 seconds, or 279 minutes or 4.65 hours to calculate the correct answer. Again, if we transpose the problem to the EU, which (currently) contains 28 countries, we find that the TSP between each of the capital cities in the EU produces 210453397504 combinations or 6.6 <em>years</em> of computation. As the problem grows in size, the time it takes to solve the problem grows by an unmanageable amount. This is a direct consequence of Turing's definition of computation. Interestingly, there is an unproved hypothesis that says that if you can think of any other way of making a physical machine that can do computing, then your machine will only ever compute exactly what Turing described. This is the <a href="https://en.wikipedia.org/wiki/Church%E2%80%93Turing_thesis">Church-Turing Thesis</a>.</p>
+<p>So we now have reasons to study Computer Science and we have some insight into why we have to learn a formal language in order to write computer programs. In this book we use C++ as our formal language. There are other computer programming languages, so why do we learn this particular one?</p>
+<h2 id="why-c"><span class="header-section-number">1.6</span> Why C++</h2>
+<p>C++<a href="#fn8" class="footnoteRef" id="fnref8"><sup>8</sup></a> is a powerful programming language which has been used in industry for over 30 years. Many of the software applications that you use day-to-day are written in C++. These include your web-browser <a href="#fn9" class="footnoteRef" id="fnref9"><sup>9</sup></a> and your word-processor <a href="#fn10" class="footnoteRef" id="fnref10"><sup>10</sup></a>.</p>
+<p>The C++ language is a <strong>standard</strong>. This means that the great and the good of C++ programming get together regularly to improve the language. They produce a document that describes the latest version of C++. The current version of this document is C++17. It's the version of the standard that was produced in 2017. We expect the next version of the standard to be agreed in 2020 and it will be called C++20. I take the view in this book that we only work with modern C++ and in the ways that modern C++ programmers should work. This means that I assume we're working with, at least, C++14.</p>
+<p>Like many programming languages, C++ is written in text files, normally with a <code>.cpp</code> file extension. These files simply contain plain-text and you can edit them with any editor that allows you to open text (note: this excludes word processors -- word processors don't edit plain text, they're much more complex than that in order to look like you're editing an A4 size page.) The C++ files are then <strong>compiled</strong> into a program. The understandable C++ is translated into an non-understandable sequence of 1's and 0's i.e binary machine code. A <strong>compiler</strong> translates from C++ to machine code.</p>
+<p>With C++ we can choose to use a number of compilers from different vendors. Because of the C++ standard document we have a high guarantee that code that compiles using one compiler will operate in the same way it does when compiled with another compiler. The main C++ compilers are:</p>
+<dl>
+<dt>GCC</dt>
+<dd><a href="http://gcc.gnu.org/">The GNU Compiler Collection</a> contains a very high-performance C++ compiler that runs on many operating systems and on many computer architectures. The Linux kernel and LibreOffice prefer to use GCC as they have to run on a variety of platforms. GCC is an open-source project and is free of cost to download and redistribute.
+</dd>
+<dt>LLVM</dt>
+<dd><a href="https://llvm.org/">The LLVM Compiler Suite</a> also contains a C++ compiler. Google's Chrome browser prefers this compiler and it's the default C++ compiler on Apple systems. LLVM is also open-source and free of cost.
+</dd>
+<dt>Visual C++</dt>
+<dd><a href="https://en.wikipedia.org/wiki/Microsoft_Visual_C%2B%2B">Microsoft</a> have their own C++ compiler that only runs on their Microsoft Windows operating system.
+</dd>
+</dl>
+<p>Intel, HP and IBM also have C++ compilers for various systems. Often these are very specialised high-performance computing machines. High-performance engineers love C++! Games programmers, particularly on consoles, also tend to prefer C++. But like everything in computing this is subject to constant change.</p>
+<p>We now know that a compiler is a program that reads a high-level program and translates it all at once, before executing any of the commands. Often you compile the program as a separate step, and then execute the compiled code later. In this case, the high-level program is called the <strong>source code</strong>, and the translated program is called the <strong>object code</strong> or the <strong>executable</strong>.</p>
+<p>As an example, suppose you write a program in C++. You might use a text editor to write the program (a text editor is a simple word processor). When the program is finished, you might save it in a file named <code>program.cpp</code>, where &quot;program&quot; is an arbitrary name you make up, and the suffix <code>.cpp</code> is a convention that indicates that the file contains C++ source code.</p>
+<p>Then, depending on what your programming environment is like, you might leave the text editor and run the compiler. The compiler would read your source code, translate it, and create a new file named <code>program.o</code> to contain the object code, or <code>program.exe</code> to contain the executable. (Aside: on Microsoft Windows executable files have the <code>.exe</code> extension, on Unix (on x86) the files do not have to have a certain extension, but contain what's known as a <em>magic number</em>, the characters <code>.</code>, <code>E</code>, <code>L' and</code>F' as the first four characters in the file.)</p>
+<div class="figure">
+<img src="images/compile.png" alt="The compilation process" />
+<p class="caption">The compilation process</p>
+</div>
+<p>The next step is to run the program, which requires some kind of executor. The role of the executor is to load the program (copy it from disk into memory) and make the computer start executing the program.</p>
+<p>Although this process may seem complicated, the good news is that in most programming environments (sometimes called development environments), these steps are automated for you. Usually you will only have to write a program and type a single command to compile and run it. On the other hand, it is useful to know what the steps are that are happening in the background, so that if something goes wrong you can figure out what it is.</p>
+<h2 id="what-we-can-do-now"><span class="header-section-number">1.7</span> What we can do now</h2>
+<p>We now have an understanding of the need for computation and we understand the limits of computation. We write software as a sequence of instructions in a formal language which is compiled into executable code.</p>
+<h1 id="hello-world"><span class="header-section-number">2</span> Hello World</h1>
+<h2 id="objective-1"><span class="header-section-number">2.1</span> Objective</h2>
+<p>In this chapter we motivate why we use a poor user interface -- the console. We also write our first program.</p>
+<h2 id="the-console"><span class="header-section-number">2.2</span> The Console</h2>
+<p>It's traditional to begin programming by writing a program that prints &quot;Hello, world&quot; on the screen. We will do this in the most simple way that we possibly can. However, this requires us to use a pretty ancient way of interacting with a computer. You might imagine that opening a window onscreen and writing &quot;Hello, world&quot; in that window requires a <a href="https://developer.gnome.org/gtkmm-tutorial/stable/sec-helloworld.html.en">reasonable amount of code</a>. So we'll avoid using windows and mouse input. We're going straight back to the kinds of interfaces everyone used in the 1980's and that are primarily only used server-side in this decade. In order to use this interface, which we'll call the <em>console</em>, I'll explain some of the features and limitations.</p>
+<p>The console is a boring window. You can write text to it, one character at a time and one line at a time. It is a text-only interface. On Microsoft Windows a console is provided by <a href="https://en.wikipedia.org/wiki/Powershell">PowerShell</a> on Linux and other Unix-like systems the console is provided by a terminal emulator as seen in figure {<span class="citation">@fig:console</span>}. The console can trace it's roots to around 1964, so you can't expect it to work like the nice interface that you find on your phone or your desktop computer. The best analogy I've found is to think of it like text messaging<a href="#fn11" class="footnoteRef" id="fnref11"><sup>11</sup></a> your computer and the computer responding with a reply text message. The interface feels clunky and error-prone to modern computer users. We are only using the console because of the simplicity of writing programs that use it.</p>
+<div class="figure">
+<img src="images/Version_7_UNIX_SIMH_PDP11_Kernels_Shell.jpeg" alt="Text-only console (image from Wikipedia)" id="fig:console" />
+<p class="caption">Text-only console (image <a href="https://commons.wikimedia.org/wiki/File:Version_7_UNIX_SIMH_PDP11_Kernels_Shell.png">from Wikipedia</a>)</p>
+</div>
+<h2 id="first-program"><span class="header-section-number">2.3</span> First Program</h2>
+<p>Most of our first program will seem to be magic. But all of it is understandable if you take time. Just remember that in C++ each non-whitespace character is important. Whitespace characters are tabs, spaces and new-lines. Let's have a look:</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span>
+
+<span class="dt">int</span> main() {
+  <span class="bu">std::</span>cout &lt;&lt; <span class="st">&quot;Hello, world&quot;</span> &lt;&lt; <span class="bu">std::</span>endl;
+  <span class="cf">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+<p>The first line <code>#include &lt;iostream&gt;</code> is a direction to bring functionality for writing to the console into our program. The <code>iostream</code> functionality defines <code>std::cout</code> and <code>std::endl</code> and the weird <code>&lt;&lt;</code> thing (called the <em>ostream operator</em>). We'll return to understanding exactly what these mean a little later. First I'd like to introduce <code>main</code>.</p>
+<p>All C++ programs start in a <em>function</em> called <code>main</code>. This is something defined by the C++ standard. It could have been called <code>start</code> or <code>begin_here</code>, but it wasn't. For traditional reasons the starting point of a C++ program is called <code>main</code>. It's not called <code>Main</code>, which is different from <code>main</code>. Almost all programming languages, including C++, are case-sensitive. So the function name <code>Main</code> is not the function named <code>main</code> because the initial letters differ in capitalisation. I'll repeat that each non-whitespace character in a C++ program is important.</p>
+<p>The <code>main</code> function starts at the opening curly brace <code>{</code> and ends at the closing curly brace <code>}</code>. In programming we often use brackets, so we have to refer to them correctly. Our program uses</p>
+<dl>
+<dt>parentheses</dt>
+<dd><code>(</code> is a left parenthesis and <code>)</code> is a right parenthesis. You might commonly call these brackets, but programmers use the technical names for them.
+</dd>
+<dt>braces</dt>
+<dd>we've already seen <code>{</code> and <code>}</code> referred to as braces or curly braces.
+</dd>
+<dt>angular brackets</dt>
+<dd>the <code>&lt;</code> and <code>&gt;</code> characters are left and right angular brackets respectively.
+</dd>
+</dl>
+<p>In addition to the various types of brackets our program contains colons, <code>:</code>, and semi-colons, <code>;</code>. It's easy to confuse <code>:</code> and <code>;</code>.</p>
+<p>Now that we've gotten all that out of the way, we can examine the <em>body</em> of the <code>main</code> function (the two lines between the curly braces). The first of these two lines is the most interesting. The line</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="bu">std::</span>cout &lt;&lt; <span class="st">&quot;Hello, world&quot;</span> &lt;&lt; <span class="bu">std::</span>endl;</code></pre></div>
+<p>says a lot, it directs -- using the ostream operator <code>&lt;&lt;</code> -- the string of text, &quot;Hello, world&quot;, followed by an end of line character, <code>std::endl</code> to the console. The console is represented by <code>std::cout</code>. We may think of <code>std::cout</code> being the <strong>st</strong>andar<strong>d</strong> <strong>c</strong>onsole <strong>out</strong>put. Keep in mind that &quot;Hello, world&quot; is a <strong>string</strong>. We will look at string, int and some other <strong>types</strong> in the later section <a href="#int-and-other-types"><code>int</code> and Other Types</a>.</p>
+<p>The <code>&lt;&lt;</code> operator makes it easy(ish) to send more interesting information to <code>std::cout</code>:</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="bu">std::</span>cout &lt;&lt; <span class="st">&quot;Hello, world &quot;</span> &lt;&lt; <span class="st">&quot;it is today&quot;</span> &lt;&lt; <span class="bu">std::</span>endl;</code></pre></div>
+<p>or</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="bu">std::</span>cout &lt;&lt; <span class="st">&quot;Ireland: &quot;</span> &lt;&lt;  <span class="dv">23</span> &lt;&lt; <span class="st">&quot; Fiji: &quot;</span> &lt;&lt; <span class="dv">20</span> &lt;&lt; <span class="bu">std::</span>endl;</code></pre></div>
+<p>we can output <code>string</code>s and numbers<a href="#fn12" class="footnoteRef" id="fnref12"><sup>12</sup></a>.</p>
+<p>There's a strange looking character, ␣, in the above string. This ␣ character is often used in programming manuals to indicate the presence of a space. The ␣ character draws your attention to the whitespace that we might otherwise ignore.</p>
+<p>Finally, out first program contains the line <code>return 0</code>. All C++ programs must <code>return</code> a number at the end of their <code>main</code> code. If the program has had no errors, it must return <code>0</code> to the operating system. As a computer user you never see this number. As a computer programmer this return number provides a lot of information to me. Let's see an example on the Unix terminal.</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="co"># Print out the files in this directory</span>
+$ <span class="fu">ls</span>
+<span class="ex">...</span>
+<span class="co"># Print out the return code</span>
+$ <span class="bu">echo</span> <span class="va">$?</span>
+<span class="ex">0</span>
+<span class="co"># Make a mistake with the `ls` command</span>
+$ <span class="fu">ls</span> moo
+<span class="ex">ls</span>: cannot access <span class="st">&#39;moo&#39;</span>: No such file or directory
+<span class="co"># Print out the return code again</span>
+$ <span class="bu">echo</span> <span class="va">$?</span>
+<span class="ex">2</span></code></pre></div>
+<p>In the above example we can see that when we run the <code>ls</code> program correctly it returns <code>0</code> to the operating system. We can see this <code>0</code> on a Unix by asking the command interpreter to <code>echo $?</code>. When we run <code>ls</code> and it generates an error we can see that it returns <code>2</code> to the operating system. As a programmer I can look up this return code in a manual to further diagnose why the problem occurred.</p>
+<p>Once we have a <code>return 0</code> as the last line of <code>main</code> we can mostly ignore this detail. I've gone into an explanation of these details because it demonstrates one of the many differences between an advanced computer user and a programmer. As a programmer you have to have a deeper understanding of the operating system on which you're running. You will have to appreciate entire computer systems at a deeper level.</p>
+<h3 id="a-stylistic-note-on-whitespace"><span class="header-section-number">2.3.1</span> A Stylistic Note on Whitespace</h3>
+<p>Programming style is vitally important. Our first program could also be written as follows:</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="pp">#include</span><span class="im">&lt;iostream&gt;</span>
+<span class="dt">int</span> main(){<span class="bu">std::</span>cout&lt;&lt;<span class="st">&quot;Hello, world&quot;</span>&lt;&lt;<span class="bu">std::</span>endl; <span class="cf">return</span> <span class="dv">0</span>;}</code></pre></div>
+<p>Both programs do the same thing. However, one is readable by a human and the other is very difficult to read. There are some common styles for writing a program and I suggest you be consistent in your application of a style. I tend to write C++ where I indent code using 4 spaces (no tabs). If you use spaces to indent your code, then do not mix in tab characters!</p>
+<p>I use newlines between statements, so the <code>std::cout</code> above and the <code>return</code> statement should appear on separate lines.</p>
+<h2 id="what-we-can-now-do"><span class="header-section-number">2.4</span> What we can now do</h2>
+<p>At the end of this chapter we can write a long <code>main</code> function which generates lots of output to the console.</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span>
+
+<span class="dt">int</span> main() {
+  <span class="bu">std::</span>cout &lt;&lt; <span class="st">&quot;Hello&quot;</span>;
+  <span class="bu">std::</span>cout &lt;&lt; <span class="st">&quot; this is Nuku&#39;alofa calling.&quot;</span> &lt;&lt; <span class="bu">std::</span>endl;
+}</code></pre></div>
+<h1 id="int-and-other-types"><span class="header-section-number">3</span> <code>int</code> and Other Types</h1>
+<h2 id="objective-2"><span class="header-section-number">3.1</span> Objective</h2>
+<p>In this chapter we introduce the ideas of types, values and variables which are fundamental to all programming languages.</p>
+<h2 id="simple-types"><span class="header-section-number">3.2</span> Simple Types</h2>
+<p>At a fundamental level in computers all information is represented as sequences of 1's and 0's. Take, for example, the sequence <span class="math inline">\(0100 0001\)</span>. If we interpret that sequence as a whole number then it represents the number <span class="math inline">\(65\)</span>. However, if we interpret the same sequence as a printable character, then it represents the character 'A'. Also, there are operations that we can perform on whole numbers, such as multiplication, that don't make sense to perform on characters. So, types will allow us to organise our data and to ensure that we only perform operations that make sense on that data. We have seen two types, <code>int</code> and <code>string</code>. I'll explain these now and add in some other basic types.</p>
+<p>In C++ we have a type that represents whole numbers. That type is <code>int</code>, short for integer. It represents positive and negative whole numbers. So <span class="math inline">\(-256, 0\)</span> and <span class="math inline">\(1024\)</span> are examples of <code>int</code>s. I can create a storage space to hold an <code>int</code> inside a function:</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">int</span> main() {
+  <span class="dt">int</span> x = <span class="dv">42</span>;
+  <span class="cf">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+<p>In the above code, we create a new storage space called <code>x</code>. The storage space can only hold whole numbers. In this case I have assigned the value <span class="math inline">\(42\)</span> to the storage space called <code>x</code>. I can also change the number in the storage space.</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">int</span> main() {
+  <span class="dt">int</span> x = <span class="dv">42</span>;
+  x = <span class="dv">-1</span>;
+  <span class="cf">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+<p>The first statement in the <code>main</code> function <code>int x = 42;</code> does exactly what we've previous seen. The second line, <code>x = -1</code> overwrites the value <span class="math inline">\(42\)</span> in storage space <code>x</code> with the value <span class="math inline">\(-1\)</span>. When we first mention <code>x</code> we have to tell the computer that we want <code>x</code> to be an <code>int</code>. On subsequent uses we don't have to tell the computer the type. The C++ compiler keeps track of that kind of information for us. Let's use the same pattern to construct storage spaces for other types.</p>
+<p>I can store a character:</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">int</span> main() {
+  <span class="dt">char</span> c = <span class="st">&#39;A&#39;</span>;
+  <span class="cf">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+<p>In this code we create a storage space, called <code>c</code>, to store a <code>char</code>. Like <code>int</code> is a shortened form of integer, the word <code>char</code> is shortened from character. I've also had to put the 'A' character in single quotes. This is part of the C++ language, characters are single letters and must be surrounded by single quotes. Recall from our introduction that C++ is a formal language. One consequence of this is that we are restricted in how we write things.</p>
+<p>There are two other interesting types, the first is <code>string</code> and the second is <code>float</code>. A <code>float</code> represents a number containing a decimal point. There are technical limitations to what <code>float</code>s can represent, so you can't treat them as precisely equivalent to decimals that you know and love from maths. For all the calculations we do in this book an <code>int</code> or a <code>float</code> is sufficient.</p>
+<p>Let's write a more complex program that uses <code>string</code> and <code>float</code>. In this program each <code>string</code> of characters is surrounded by double quote marks. Moreover, the storage places in this program have more descriptive names than 'c' or 'x' used above. It is good to use descriptive names for your storage boxes.</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span>
+<span class="pp">#include </span><span class="im">&lt;string&gt;</span>
+
+<span class="dt">int</span> main() {
+  <span class="bu">std::</span>string name = <span class="st">&quot;Hiro Protagonist&quot;</span>;
+  <span class="dt">float</span> height = <span class="fl">183.5</span>;
+
+  <span class="bu">std::</span>cout &lt;&lt; name &lt;&lt; <span class="st">&quot; is &quot;</span> &lt;&lt; height &lt;&lt; <span class="st">&quot;cm tall.&quot;</span> &lt;&lt; <span class="bu">std::</span>endl;
+  <span class="cf">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+<p>The cool thing about the above code is that it uses functionality to print the values stored in <code>name</code> and <code>height</code> to the console. You'll also notice that the type of <code>float</code> is just <code>float</code> but the type of a string is <code>std::string</code>. In C++ <code>int</code>, <code>char</code> and <code>float</code> are part of the core language but <code>std::string</code> comes from the standard library: hence the <code>std::</code> prefix on the type name.</p>
+<h2 id="type-errors"><span class="header-section-number">3.3</span> Type Errors</h2>
+<p>Types are an incredibly useful feature of programming languages. By enforcing type checking the compiler can let the programmer know that they've made an error in writing their code. As an example, it makes no sense to try and store a <code>string</code> in a storage box that should contain an <code>int</code>:</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">int</span> main() {
+  <span class="dt">int</span> age = <span class="st">&quot;seventeen&quot;</span>;
+  <span class="cf">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+<p>This error generates the rather cryptic output from a compiler:</p>
+<div class="sourceCode"><pre class="sourceCode bash"><code class="sourceCode bash"><span class="ex">type_errors.cpp</span>: In function <span class="st">&#39;int main()&#39;</span>:
+<span class="ex">type_errors.cpp</span>:2:13: error: invalid conversion from <span class="st">&#39;const char*&#39;</span> to <span class="st">&#39;int&#39;</span> [-fpermissive]
+   <span class="ex">int</span> age = <span class="st">&quot;seventeen&quot;</span><span class="kw">;</span>
+             ^<span class="ex">~~~~~~~~~~</span></code></pre></div>
+<p>Type errors are frustrating when you're learning to program. But they're less frustrating than speaking to an irate customer who just had your program fail because of a type error! It is useful to deliberately introduce some errors into a working program so that you can get used to the way compilers report errors.</p>
+<h2 id="storage-boxes"><span class="header-section-number">3.4</span> Storage Boxes</h2>
+<p>Thus far I've used the term <em>storage box</em> to describe how we store values of a given type. We need to develop a more precise terminology in order to describe exactly what is going on here. The term we use is <strong>variable</strong>. In the following code we <strong>declare</strong> a variable of type <code>int</code>.</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">int</span> main() {
+  <span class="dt">int</span> my_variable;
+  <span class="cf">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+<p>We can, as we have seen, declare a variable and <em>initialise</em> it at the same time:</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">int</span> main() {
+  <span class="dt">int</span> my_variable = <span class="dv">42</span>;
+  <span class="cf">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+<p>Or we can declare it in one statement and initialise it in another:</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">int</span> main() {
+  <span class="dt">int</span> my_variable;
+  my_variable = <span class="dv">42</span>;
+  <span class="cf">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+<p>If we try to use a variable before we have declared it, then we are in violation of the C++ language. When we violate the language our compiler generates an error.</p>
+<h2 id="what-we-can-now-do-1"><span class="header-section-number">3.5</span> What we can now do</h2>
+<p>We can now create variables of different types and output them to the console:</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span>
+
+<span class="dt">int</span> main() {
+  <span class="bu">std::</span>string university_name = <span class="st">&quot;University of the South Pacific&quot;</span>;
+  <span class="dt">int</span> founding_year = <span class="dv">1968</span>;
+  <span class="dt">int</span> age = <span class="dv">2018</span> - founding_year;
+
+  <span class="bu">std::</span>cout &lt;&lt; university_name &lt;&lt; <span class="st">&quot; was founded in &quot;</span> &lt;&lt; founding_year &lt;&lt; <span class="bu">std::</span>endl;
+  <span class="bu">std::</span>cout &lt;&lt; <span class="st">&quot;It is &quot;</span> &lt;&lt; age &lt;&lt; <span class="st">&quot; years old.&quot;</span> &lt;&lt; <span class="bu">std::</span>endl;
+  <span class="cf">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+<p>We can create different instances of the program for other Universities or companies.</p>
+<h1 id="functions"><span class="header-section-number">4</span> Functions</h1>
+<h2 id="objective-3"><span class="header-section-number">4.1</span> Objective</h2>
+<p>In the last chapter we introduced types. We now show how to pass instances of types around a program.</p>
+<h2 id="simple-functions"><span class="header-section-number">4.2</span> Simple Functions</h2>
+<p>We have seen an example of a function. The <code>main</code> function is the starting point of every application. We can write other functions too. These are vitally important to help us organise the structure of our application. I'm going to write a stupid function just to demonstate the concept. All functions have a name, and this function is called <code>zero</code>. We can call our <code>zero</code> function from another function, say <code>main</code>, and it will <code>return</code> the value <code>0</code>.</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">int</span> zero() {
+  <span class="cf">return</span> <span class="dv">0</span>;
+}
+
+<span class="dt">int</span> main() {
+  <span class="dt">int</span> z = zero();
+  <span class="cf">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+<p>So the above progam achieves nothing meaningful except that it demonstrates a simple function. It doesn't produce any visible output, but it does run. If we start the execution of the program from <code>main</code> we find that it creates a variable called <code>z</code> of type <code>int</code>. The variable <code>z</code> is assigned a value that is returned from the call to the function named <code>zero</code>.</p>
+<p>The signature for the function called <code>zero</code> is given by <code>int zero()</code>. The signature provides a lot of information about the function. The <code>int</code> part of the signature tells us that <code>zero</code> returns a value of type <code>int</code>. The parentheses tells us that when we call the function <code>zero</code> we don't have to pass it any further information.</p>
+<p>We can write a more useful function that multiplies a value by itself. It's normal to call this function <code>square</code>! If we want <code>square</code> to multiply any <code>int</code> by itself then we have to write the function so that it can be <em>passed</em> a copy of an <code>int</code>:</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">int</span> square(<span class="dt">int</span> x) {
+  <span class="cf">return</span> x*x;
+}</code></pre></div>
+<p>The signature for <code>square</code> is different from <code>zero</code>. The signature <code>int square(int x)</code> tells us that the function is called <code>square</code> and it returns an <code>int</code>. The interesting bit of <code>square</code> is within the parentheses. The <code>int x</code> tells us that we must pass a copy of an <code>int</code> into the function <code>square</code>. Inside the function <code>square</code> the passed in <code>int</code> will be called <code>x</code>. This allows us to multiply <code>x</code> by itself: <code>x*x</code>. The value of <code>x*x</code> is then returned from the function.</p>
+<p>We can call <code>square</code> from <code>main</code> in the same way that we called <code>zero</code> from <code>main</code>:</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">int</span> main() {
+  <span class="dt">int</span> s = square(<span class="dv">7</span>);
+  <span class="cf">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+<h2 id="signature-before-use"><span class="header-section-number">4.3</span> Signature before use</h2>
+<p>Recall that we have to declare a variable before we use it:</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">int</span> main() {
+  <span class="dt">int</span> x = <span class="dv">0</span>;
+  x = <span class="dv">1</span>;
+  <span class="cf">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+<p>as</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">int</span> main() {
+  x = <span class="dv">1</span>;
+  <span class="dt">int</span> x = <span class="dv">0</span>;
+  <span class="cf">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+<p>generates a compiler error. We similarly must define a function before we use it. Hence, in the above examples I've defined either <code>int zero()</code> or <code>int square(int x)</code> before they are used in <code>main()</code>.</p>
+<h2 id="multiple-parameters"><span class="header-section-number">4.4</span> Multiple Parameters</h2>
+<p>A function can take more than one parameter passed to it. So for example, I could write a function that calculates the multiplication of two integers.</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">int</span> mult(<span class="dt">int</span> x, <span class="dt">int</span> y) {
+  <span class="dt">int</span> r = x * y;
+  <span class="cf">return</span> r;
+}
+
+<span class="dt">int</span> main() {
+  mult(<span class="dv">8</span>, <span class="dv">9</span>);
+  <span class="cf">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+<p>Again, it's not a very interesting exampe, but it illustrates our point clearly. Our function is called <code>mult</code>, it returns an <code>int</code> i.e. a whole number to the calling code. The parameter list for <code>mult</code> states that it takes a copy of two <code>int</code> values. We call the first passed value <code>x</code> and the second passed value <code>y</code> within the function <code>mult</code>.</p>
+<p>Functions can take any number of parameters, but it is unusual to pass in more than four values. If you find yourself writing functions that take seven or eight parameters you might think about restruturing your code.</p>
+<p>We can write functions that take multiple parameters, but a function can only ever return a single value. Consider the equation for calculating the roots of a quadratic equation, a secondary-school favourite!</p>
+<p><span class="math display">\[
+x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a}
+\]</span></p>
+<p>We can turn this into two functions <code>positive_root</code> and <code>negative_root</code>. I'll present the <code>positive_root</code> version here;</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="pp">#include </span><span class="im">&lt;cmath&gt;</span>
+
+<span class="dt">float</span> positive_root(<span class="dt">int</span> a, <span class="dt">int</span> b, <span class="dt">int</span> c) {
+  <span class="dt">float</span> x = (-b + sqrt((b * b) - (<span class="dv">4</span>*a*c)))/(<span class="dv">2</span>*a);
+  <span class="cf">return</span> x;
+}</code></pre></div>
+<p>In this presentation I use the <code>sqrt</code> function from the <code>cmath</code> library. The <code>sqrt</code> function returns the square root of a value. We can't write a ffunction that returns two <code>float</code>s (in a future chapter we can return a list of <code>float</code>s).</p>
+<h2 id="testing-functions"><span class="header-section-number">4.5</span> Testing Functions</h2>
+<p>Choose three values you know will work in the function, and choose three values you know will not work in the function. In many simple cases there won't be values that don't work with the function; in these cases we use our types to help us. An <code>int</code> ranges from <span class="math inline">\(-2,147,483,648\)</span> to <span class="math inline">\(2,147,483,647\)</span>, so it's a good idea to check the minumum value, <span class="math inline">\(0\)</span> and the maximum value.</p>
+<p>Choosing the min and max values to test comes from the observation that programmers make errors in boundary cases. What happens if we call <code>square(2147483)</code>? The use of zero as a test value comes from experience. Again, programmers often make mistakes with zero values. In the case of strings we might use <code>&quot;&quot;</code>, a string containing no characters as an example input that is allowed but we may not expect.<a href="#fn13" class="footnoteRef" id="fnref13"><sup>13</sup></a></p>
+<p>If your function accepts an <code>int</code> parameter then you're allowing any possible integer input. If you accept a <code>string</code> as a parameter, then you're allowing every possible string. There exists a big list of naughty strings whcih can break some more advanced applications. The list is available at <a href="https://github.com/minimaxir/big-list-of-naughty-strings" class="uri">https://github.com/minimaxir/big-list-of-naughty-strings</a> and you may wish to examine it. Do note, the list contains swear words and words of an innapropriate nature for testing purposes.</p>
+<h3 id="test-harness"><span class="header-section-number">4.5.1</span> Test Harness</h3>
+<p>If you're choosing three valid test values and three invalid test values it is useful to think about how to put them into your application. Here's a straightforward pattern to follow:</p>
+<ol style="list-style-type: decimal">
+<li>Given a function with name <code>foo</code>.</li>
+<li>Write another function called <code>test_foo</code>
+<ul>
+<li>Use <code>assert</code> to validate your test cases.</li>
+</ul></li>
+<li>Run all test functions at the start of <code>main</code>.</li>
+</ol>
+<p>So suppose we have our <code>square</code> function above we might also have:</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="pp">#include </span><span class="im">&lt;cassert&gt;</span>
+
+<span class="dt">void</span> test_square() {
+  <span class="dt">int</span> test_value1 = <span class="dv">-2</span>;
+  <span class="dt">int</span> test_value2 = <span class="dv">3</span>;
+  <span class="dt">int</span> test_value3 = <span class="dv">100</span>;
+
+  <span class="dt">int</span> minimum_int = <span class="dv">-2147483648</span>;
+  <span class="dt">int</span> maximum_int = <span class="dv">2147483647</span>;
+  <span class="dt">int</span> zero = <span class="dv">0</span>;
+
+  assert(<span class="dv">4</span> == square(test_value1));
+  assert(<span class="dv">9</span> == square(test_value2));
+  assert(<span class="dv">10000</span> == square(test_value3));
+
+  assert(<span class="dv">0</span> == square(minimum_int));
+  assert(<span class="dv">1</span> == square(maximum_int));
+  assert(<span class="dv">0</span> == square(zero));
+}
+
+<span class="dt">int</span> main() {
+  <span class="co">// Tests</span>
+  test_square();
+
+  <span class="co">// Main Code</span>
+  <span class="dt">int</span> x = square(<span class="dv">2</span>);
+  <span class="bu">std::</span>cout &lt;&lt; x &lt;&lt; <span class="bu">std::</span>endl;
+}</code></pre></div>
+<h2 id="void-return"><span class="header-section-number">4.6</span> <code>void</code> return</h2>
+<p>Functions return values. This makes it possible to test them. It's also possible to write a function that doesn't return a value. For example, if we wanted to write a function that only printed out some information, there would be no need to return a value. Such a function has a <code>void</code> return type:</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span>
+
+<span class="dt">int</span> i_return_seven() {
+  <span class="cf">return</span> <span class="dv">7</span>;
+}
+
+<span class="dt">void</span> i_return_nothing() {
+  <span class="bu">std::</span>cout &lt;&lt; <span class="st">&quot;You called a function&quot;</span> &lt;&lt; <span class="bu">std::</span>endl;
+}
+
+<span class="dt">int</span> main() {
+  i_return_seven();
+  i_return_nothing();
+}</code></pre></div>
+<p>The example above has two simple functions, one called <code>i_return_seven</code> which, unsurprisingly, returns the value <code>7</code>. The function <code>i_return_nothing</code> has a <code>void</code> return type. So it does not return any value but it has some <strong>side-effects</strong> such that it prints some information to the console. A function that has a <code>void</code> return type, does not need a <code>return</code> statement at the end.</p>
+<h2 id="what-we-can-now-do-2"><span class="header-section-number">4.7</span> What we can now do</h2>
+<p>We can now break our program down into different functions:</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span>
+
+<span class="dt">int</span> calculate_age(<span class="dt">int</span> founding_year) {
+  <span class="cf">return</span> <span class="dv">2018</span> - founding_year;
+}
+
+<span class="dt">void</span> print_information(string university_name, <span class="dt">int</span> founding_year) {
+  <span class="dt">int</span> age = calculate_age(founding_year);
+  <span class="bu">std::</span>cout &lt;&lt; university_name &lt;&lt; <span class="st">&quot; was founded in &quot;</span> &lt;&lt; founding_year &lt;&lt; <span class="bu">std::</span>endl;
+  <span class="bu">std::</span>cout &lt;&lt; <span class="st">&quot;It is &quot;</span> &lt;&lt; age &lt;&lt; <span class="st">&quot; years old.&quot;</span> &lt;&lt; <span class="bu">std::</span>endl;
+}
+
+<span class="dt">int</span> main() {
+  <span class="dt">int</span> founding_year = <span class="dv">1968</span>;
+  print_information(<span class="st">&quot;USP&quot;</span>, founding_year);
+  <span class="cf">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+<p>Using functions allows is to write smaller blocks of code. These are <em>easier to test</em>!</p>
+<p>By breaking your code down into small functions (let's say 10 lines maximum as a rule-of-thumb) you <em>will</em> write higher-quality code.</p>
+<h1 id="input-and-output"><span class="header-section-number">5</span> Input and Output</h1>
+<h2 id="objective-4"><span class="header-section-number">5.1</span> Objective</h2>
+<p>We look at prompting users for input and processing that input.</p>
+<h2 id="output"><span class="header-section-number">5.2</span> Output</h2>
+<p>We have already seen how to output to the console. This was introduced in our &quot;Hello, world!&quot; program. Output to the console directs <code>string</code>s and <code>int</code>s to <code>cout</code>. This is useful to, for example, print current exchange rates to the screen:</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span>
+
+<span class="dt">void</span> print_fjd() {
+  <span class="bu">std::</span>cout &lt;&lt; <span class="st">&quot;FJD$&quot;</span> &lt;&lt; <span class="dv">1</span> &lt;&lt; <span class="st">&quot; is EUR&quot;</span> &lt;&lt; <span class="fl">0.4076</span> &lt;&lt; <span class="bu">std::</span>endl;
+}
+
+<span class="dt">void</span> print_vatu() {
+  <span class="bu">std::</span>cout &lt;&lt; <span class="dv">1</span> &lt;&lt; <span class="st">&quot;VT is EUR&quot;</span> &lt;&lt; <span class="fl">0.0076</span> &lt;&lt; <span class="bu">std::</span>endl;
+}
+
+<span class="dt">void</span> print_sat() {
+  <span class="bu">std::</span>cout &lt;&lt; <span class="st">&quot;SAT$&quot;</span> &lt;&lt; <span class="dv">1</span> &lt;&lt; <span class="st">&quot; is EUR&quot;</span> &lt;&lt; <span class="fl">0.33143</span> &lt;&lt; <span class="bu">std::</span>endl;
+}
+
+<span class="dt">int</span> main() {
+  print_fjd();
+  print_vatu();
+  print_sat();
+  <span class="cf">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+<p>We could also have structured this program as:</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span>
+
+<span class="dt">void</span> print_with_pre_symbol(
+     <span class="bu">std::</span>string symbol, <span class="dt">float</span> eur_value ) {
+  <span class="bu">std::</span>cout &lt;&lt; symbol &lt;&lt; <span class="dv">1</span>;
+  <span class="bu">std::</span>cout &lt;&lt; <span class="st">&quot; is EUR&quot;</span> &lt;&lt; eur_value &lt;&lt; <span class="bu">std::</span>endl;
+}
+
+<span class="dt">void</span> print_with_post_symbol(
+     <span class="bu">std::</span>string symbol , <span class="dt">float</span> eur_value ) {
+  <span class="bu">std::</span>cout &lt;&lt; <span class="dv">1</span> &lt;&lt; symbol;
+  <span class="bu">std::</span>cout &lt;&lt; <span class="st">&quot; is EUR&quot;</span> &lt;&lt; eur_value &lt;&lt; <span class="bu">std::</span>endl;
+}
+
+<span class="dt">int</span> main() {
+  print_with_pre_symbol(<span class="st">&quot;FJD$&quot;</span>, <span class="fl">0.4076</span>);
+  print_with_post_symbol(<span class="st">&quot;VT&quot;</span>, <span class="fl">0.0076</span>);
+  print_with_pre_symbol(<span class="st">&quot;SAT$&quot;</span>, <span class="fl">0.33143</span>);
+  <span class="cf">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+<p>In fact there are an infinite number of ways of writing the same program<a href="#fn14" class="footnoteRef" id="fnref14"><sup>14</sup></a>. The first version of our currency printing function is arguably easier to read. The second version is arguably easier to extend. As a rule-of-thumb I prefer ease of reading over ease of extension. The logic here is that you <em>will</em> have to read your own code it's only a possibility that you might have to extend it. In any case, if we need to extend our functions it's easy to rewrite them then.</p>
+<p>We can also print how many Euro we might get for FJD$100:</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span>
+
+<span class="dt">int</span> main() {
+  <span class="dt">float</span> fjd_value = <span class="dv">100</span>;
+  <span class="dt">float</span> eur_value = fjd_value * <span class="fl">0.4076</span>;
+
+  <span class="bu">std::</span>cout &lt;&lt; <span class="st">&quot;FJD$&quot;</span> &lt;&lt; fjd_value &lt;&lt; <span class="st">&quot; is worth EUR&quot;</span> &lt;&lt; eur_value &lt;&lt; <span class="bu">std::</span>endl;
+  <span class="cf">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+<p>But every time we want to find out how many hard earned FJD we need to convert into holiday money we'd have to modify the source code. This makes the program <em>very</em> difficult to use. Surely there must be some way of taking that value in from the user?</p>
+<h2 id="input"><span class="header-section-number">5.3</span> Input</h2>
+<p>We've done console output and you've seen how it's not like the nice UIs you find on your phone. Console input is going to be similarly clunky. The only advantage is that it is easier to write the code. The major disadvantage is that this simply isn't how we write programs intended for normal users to use. It follows that you are probably not used to this mode of input and your mental model of a computer doesn't fit with console input. Let's just stick with it for the moment though.</p>
+<p>To read in an integer from the console -- which is <em>almost always</em> connected to a keyboard -- we use the <code>istream</code> operator denoted <code>&gt;&gt;</code> i.e. the opposite direction of the <code>ostream</code> operator. Like <code>cout</code>, the console input exists in the <code>std</code> namespace so its full name is <code>std::cin</code>.</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span>
+
+<span class="dt">int</span> main() {
+  <span class="dt">int</span> fjd_value;
+  <span class="bu">std::</span>cout &lt;&lt; <span class="st">&quot;How many FJD to convert to EUR? &quot;</span>;
+  <span class="bu">std::</span>cin &gt;&gt; fjd_value;
+  <span class="bu">std::</span>cout &lt;&lt; <span class="st">&quot;You have chosen to convert FJD$&quot;</span>  &lt;&lt; fjd_value &lt;&lt; <span class="bu">std::</span>endl;
+  <span class="cf">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+<p>If we wanted to read in a <code>string</code> rather than an <code>int</code> then we would <code>&gt;&gt;</code> into a <code>string</code> shaped hole:</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span>
+
+<span class="dt">int</span> main() {
+  <span class="bu">std::</span>string currency;
+  <span class="bu">std::</span>cout &lt;&lt; <span class="st">&quot;What is your favourite currency? &quot;</span>;
+  <span class="bu">std::</span>cin &gt;&gt; currency
+  <span class="bu">std::</span>cout &lt;&lt; <span class="st">&quot;Your favourite currency is &quot;</span> &lt;&lt; currency &lt;&lt; <span class="bu">std::</span>endl;</code></pre></div>
+<p>That seems straightforward! To read in an <code>int</code> we <code>std::cin &gt;&gt;</code> into an <code>int</code> variable. To do the same for <code>string</code> we <code>std::cin &gt;&gt;</code> into a <code>string</code> variable. What happens though if you type the character 'a' as an input for an <code>int</code>?</p>
+<p>It's useful to write yourself a suite of input functions, such as:</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">int</span> get_int() {
+  <span class="dt">int</span> x;
+  <span class="bu">std::</span>cin &gt;&gt; x;
+  <span class="cf">return</span> x;
+}</code></pre></div>
+<p>Again, we apply the rule-of-thumb to write small functions. This will serve us very well in future chapters.</p>
+<h2 id="testing-input"><span class="header-section-number">5.4</span> Testing Input</h2>
+<p>Here be dragons! Any time you ask a user to do something, they <strong>will</strong> do something you have not previously considered. Remember they're a creative bunch out there. We can't yet write code that tests the <code>get_int()</code> function from above. But recall another rule-of-thumb about having three values you expect to work and three values you don't expect to work. You can document these values in a comment!</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="co">/** </span>Gets an <span class="er">`</span>int<span class="er">`</span> from cin.
+ *
+ *  | Expected Input    | Result         |
+ *  |-------------------|----------------|
+ *  |   <span class="dv">-1</span>              | <span class="dv">-1</span> is returned |
+ *  |   <span class="dv">0</span>               |  <span class="dv">0</span> is returned |
+ *  |   <span class="dv">1</span>               |  <span class="dv">1</span> is returned |
+ *  |   <span class="st">&#39;x&#39;</span>             |  unknown       |
+ *  | <span class="st">&quot;three&quot;</span><span class="co">           </span>|  unknown       |
+ *  |  <span class="st">&quot;&quot;</span><span class="co"> </span>(empty input) |  unknown       |
+ */
+<span class="dt">int</span> get_int() {
+  <span class="dt">int</span> x;
+  <span class="bu">std::</span>cin &gt;&gt; x;
+  <span class="cf">return</span> x;
+}</code></pre></div>
+<p>This is good documentation for the poor programmer who has to come along later and use your code. This poor programmer is often you! Just a few weeks later after you've already forgotten the details of how the function works. Your documentation can help yourself. I will often put a <code>FIXME</code> beside the inputs with unknown results. This encourages me to go back later and ensure that the code only ever returns valid <code>int</code>s.</p>
+<p>We've uncovered a huge gap in our knowledge. Though we can now take in some input, we don't know how to check if the input is valid or not. It turns out that checking conditions is a useful thing to be able to do. We will study conditionals in the next chapter.</p>
+<h2 id="what-we-can-now-do-3"><span class="header-section-number">5.5</span> What we can now do</h2>
+<p>We can now read input values from the console.</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">
+<span class="dt">int</span> read_int() {
+  <span class="dt">int</span> val;
+  <span class="bu">std::</span>cin &gt;&gt; val;
+  <span class="bu">std::</span>cout &lt;&lt; <span class="st">&quot;You input the value &quot;</span> &lt;&lt; val &lt;&lt; <span class="bu">std::</span>endl;
+}</code></pre></div>
+<h1 id="branching-computation"><span class="header-section-number">6</span> Branching Computation</h1>
+<h2 id="objective-5"><span class="header-section-number">6.1</span> Objective</h2>
+<p>We want to introduce multiple decision points into our computations.</p>
+<h2 id="static-structure"><span class="header-section-number">6.2</span> Static Structure</h2>
+<p>So far we have only written straight line code. This is code that starts, executes each line sequentially, and ends. Take a cut down version of the example from our previous chapter:</p>
+<div class="sourceCode"><table class="sourceCode cpp numberLines"><tr class="sourceCode"><td class="lineNumbers"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre></td><td class="sourceCode"><pre><code class="sourceCode cpp"><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span>
+
+<span class="dt">void</span> print_fjd(<span class="dt">int</span> fjd_value) {
+  <span class="bu">std::</span>cout &lt;&lt; <span class="st">&quot;FJD$&quot;</span> &lt;&lt; fjd_value &lt;&lt; <span class="st">&quot; is EUR&quot;</span> &lt;&lt; (fjd_value * <span class="fl">0.4076</span>) &lt;&lt; <span class="bu">std::</span>endl;
+}
+
+<span class="dt">int</span> main() {
+  <span class="dt">int</span> fjd_amount = <span class="dv">100</span>;
+  print_fjd(fjd_amount);
+  <span class="cf">return</span> <span class="dv">0</span>;
+}</code></pre></td></tr></table></div>
+<p>This code can be represented as two <strong>flowcharts</strong>.</p>
+<p><img src="images/straight-line-code.png" alt="Flowchart for simple example" />{<span class="citation">@fig:straight-line-code</span>}</p>
+<p>In figure <span class="citation">@fig:straight-line-code</span> we see a representation of the <code>main</code> function. The <code>main</code> function starts and then immediately calls the <code>print_fjd</code> function passing in the value <code>100</code>. In a flowchart the fact that <code>print_fjd</code> is a function call is depicted using the rectangle with double lined walls on the left and right side. The <code>print_fjd</code> function itself has only one block of executable code, represented by the parallelogram. In my flowchart I've summarised the operation of the code in this block rather than go into the detail about <code>std::cout</code>.</p>
+<p>Flowcharts are an excellent tool for starting with a problem statement and breaking it down into smaller functions. They provide a <em>static</em> view of the structure of software. The static view tends to ignore the values of variables and values passed to functions -- it only shows the structure of the software. Sometimes we need a more <em>dynamic</em> view of what is happening taking account of the values of variables. To see this we trace the execution of the software.</p>
+<h2 id="tracing-execution"><span class="header-section-number">6.3</span> Tracing Execution</h2>
+<p>Tracing the execution of software is the process of stepping through each line of code in a concrete example. One useful way to trace the execution of code is to start with a table drawn on paper:</p>
+<table>
+<thead>
+<tr class="header">
+<th>function</th>
+<th>line number</th>
+<th>variable name</th>
+<th>details</th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+<p>For our simple program above a full trace through the program starts on line <span class="math inline">\(7\)</span>. I've traced throgh the execution of this program on paper, as seen in figure <span class="citation">@fig:program-execution</span>.</p>
+<p><img src="images/program-execution.jpeg" alt="Tracing simple execution" />{<span class="citation">@fig:program-execution</span>}</p>
+<p>In figure <span class="citation">@fig:program-execution</span> I started on line 7 and one column is called <code>fjd_amount</code> as a variable of that name appears in the <code>main</code> function. On the next line of chode where <code>fjd_amount</code> is declared and initialised we fill in the value of the variable as <code>100</code>. Interestingly, the next line, line <span class="math inline">\(9\)</span>, calls the <code>print_fjd</code> function. In order to trace this we draw a new grid to keep track of the value of variables in that function.</p>
+<p>This all feels a bit overkill for such simple code. The value of flowcharts and tracing will be seen when we introduce conditional execution.</p>
+<h2 id="conditional-execution"><span class="header-section-number">6.4</span> Conditional execution</h2>
+<p>In order to write useful programs, we almost always need the ability to check certain conditions and change the behaviour of the program accordingly. Conditional statements give us this ability. The simplest form is the <code>if</code> statement:</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">  <span class="cf">if</span> (x &gt; <span class="dv">0</span>) {
+    cout &lt;&lt; <span class="st">&quot;x is positive&quot;</span> &lt;&lt; endl;
+  }</code></pre></div>
+<p>% The expression in parentheses is called the condition. If it is true, then the statements in brackets get executed. If the condition is not true, nothing happens.</p>
+<p> </p>
+<p>The condition can contain any of the comparison operators:</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">x == y  <span class="co">// x equals y</span>
+x != y  <span class="co">// x is not equal to y</span>
+x &gt; y   <span class="co">// x is greater than y</span>
+x &lt; y   <span class="co">// x is less than y</span>
+x &gt;= y  <span class="co">// x is greater than or equal to y</span>
+x &lt;= y  <span class="co">// x is less than or equal to y</span></code></pre></div>
+<p>Although these operations are probably familiar to you, the syntax C++ uses is a little different from mathematical symbols like <span class="math inline">\(=\)</span>, <span class="math inline">\(\neq\)</span> and <span class="math inline">\(\le\)</span>. A common error is to use a single <code>=</code> instead of a double <code>==</code>. Remember that <code>=</code> is the assignment operator, and <code>==</code> is a comparison operator. Also, there is no such thing as <code>=&lt; or</code>=&gt;`.</p>
+<p>The two sides of a condition operator have to be the same type. You can only compare <code>int</code> to <code>int</code> and <code>float</code> to <code>float</code>. Unfortunately, at this point you can't compare <code>string</code>s in this manner! There is a way to compare <code>string</code>s, but we won't get to it for a couple of chapters.</p>
+<h2 id="alternative-execution"><span class="header-section-number">6.5</span> Alternative execution</h2>
+<p>A second form of conditional execution is alternative execution, in which there are two possibilities, and the condition determines which one gets executed. The syntax looks like:</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">  <span class="cf">if</span> (x%<span class="dv">2</span> == <span class="dv">0</span>) {
+    cout &lt;&lt; <span class="st">&quot;x is even&quot;</span> &lt;&lt; endl;
+  } <span class="cf">else</span> {
+    cout &lt;&lt; <span class="st">&quot;x is odd&quot;</span> &lt;&lt; endl;
+  }</code></pre></div>
+<p>If the remainder when <code>x</code> is divided by 2 is zero, then we know that <code>x</code> is even, and this code displays a message to that effect. If the condition is false, the second set of statements is executed. Since the condition must be true or false, exactly one of the alternatives will be executed.</p>
+<p>As an aside, if you think you might want to check the parity (evenness or oddness) of numbers often, you might want to &quot;wrap&quot; this code up in a function, as follows:</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">void</span> printParity (<span class="dt">int</span> x) {
+  <span class="cf">if</span> (x%<span class="dv">2</span> == <span class="dv">0</span>) {
+    cout &lt;&lt; <span class="st">&quot;x is even&quot;</span> &lt;&lt; endl;
+  } <span class="cf">else</span> {
+    cout &lt;&lt; <span class="st">&quot;x is odd&quot;</span> &lt;&lt; endl;
+  }
+}</code></pre></div>
+<p>Now you have a function named <code>printParity</code> that will display an appropriate message for any integer you care to provide. In <code>main</code> you would call this function as follows:</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">  printParity (<span class="dv">17</span>);</code></pre></div>
+<p>Always remember that when you <code>call</code> a function, you do not have to declare the types of the arguments you provide. C++ can figure out what type they are. You should resist the temptation to write things like:</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">  <span class="dt">int</span> number = <span class="dv">17</span>;
+  printParity (<span class="dt">int</span> number);         <span class="co">// WRONG!!!</span></code></pre></div>
+<p>Sometimes you want to check for a number of related conditions and choose one of several actions. One way to do this is by <strong>chaining</strong> a series of <code>if</code>s and <code>else</code>s:</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">  <span class="cf">if</span> (x &gt; <span class="dv">0</span>) {
+    cout &lt;&lt; <span class="st">&quot;x is positive&quot;</span> &lt;&lt; endl;
+  } <span class="cf">else</span> <span class="cf">if</span> (x &lt; <span class="dv">0</span>) {
+    cout &lt;&lt; <span class="st">&quot;x is negative&quot;</span> &lt;&lt; endl;
+  } <span class="cf">else</span> {
+    cout &lt;&lt; <span class="st">&quot;x is zero&quot;</span> &lt;&lt; endl;
+  }</code></pre></div>
+<p>These chains can be as long as you want, although they can be difficult to read if they get out of hand. One way to make them easier to read is to use standard indentation, as demonstrated in these examples. If you keep all the statements and squiggly-braces lined up, you are less likely to make syntax errors and you can find them more quickly if you do.</p>
+<p>In addition to chaining, you can also nest one conditional within another. We could have written the previous example as:</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">  <span class="cf">if</span> (x == <span class="dv">0</span>) {
+    cout &lt;&lt; <span class="st">&quot;x is zero&quot;</span> &lt;&lt; endl;
+  } <span class="cf">else</span> {
+    <span class="cf">if</span> (x &gt; <span class="dv">0</span>) {
+      cout &lt;&lt; <span class="st">&quot;x is positive&quot;</span> &lt;&lt; endl;
+    } <span class="cf">else</span> {
+      cout &lt;&lt; <span class="st">&quot;x is negative&quot;</span> &lt;&lt; endl;
+    }
+  }</code></pre></div>
+<p>There is now an outer conditional that contains two branches. The first branch contains a simple output statement, but the second branch contains another <code>if</code> statement, which has two branches of its own. Fortunately, those two branches are both output statements, although they could have been conditional statements as well.</p>
+<p>Notice again that indentation helps make the structure apparent, but nevertheless, nested conditionals get difficult to read very quickly. In general, it is a good idea to avoid them when you can.</p>
+<p>On the other hand, this kind of <strong>nested structure</strong> is common, and we will see it again, so you better get used to it.</p>
+<h2 id="what-we-can-now-do-4"><span class="header-section-number">6.6</span> What we can now do</h2>
+<p>We can now branch our computations:</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span>
+
+<span class="dt">int</span> read_int() {
+  <span class="dt">int</span> val;
+  <span class="bu">std::</span>cin &gt;&gt; val;
+  <span class="cf">return</span> val;
+}
+
+<span class="dt">int</span> main() {
+  <span class="dt">int</span> fjd_amount;
+
+  <span class="bu">std::</span>cout &lt;&lt; <span class="st">&quot;Please enter an amount in FJD for conversion to EUR: &quot;</span>;
+  fjd_amount = read_int();
+
+  <span class="cf">if</span>(fjd_amount &lt; <span class="dv">0</span>) {
+    <span class="bu">std::</span>cout &lt;&lt; <span class="st">&quot;You have entered an invalid amount&quot;</span> &lt;&lt; <span class="bu">std::</span>endl;
+  } <span class="cf">else</span> {
+    <span class="bu">std::</span>cout &lt;&lt; <span class="st">&quot;FJD$&quot;</span> &lt;&lt; fjd_amount &lt;&lt; <span class="st">&quot; is worth EUR&quot;</span> &lt;&lt; (fjd_amount * <span class="fl">0.4076</span>) &lt;&lt; <span class="bu">std::</span>endl;
+  }
+  <span class="cf">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+<h1 id="iteration"><span class="header-section-number">7</span> Iteration</h1>
+<h2 id="objective-6"><span class="header-section-number">7.1</span> Objective</h2>
+<p>In this chapter we introduce loops which allow the repition of blocks of instructions.</p>
+<h2 id="multiple-assignment"><span class="header-section-number">7.2</span> Multiple assignment</h2>
+<p>I haven't said much about it, but it is legal in C++ to make more than one assignment to the same variable. The effect of the second assignment is to replace the old value of the variable with a new value.</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">  <span class="dt">int</span> fred = <span class="dv">5</span>;
+  cout &lt;&lt; fred;
+  fred = <span class="dv">7</span>;
+  cout &lt;&lt; fred;</code></pre></div>
+<p>The output of this program is <code>57</code>, because the first time we print <code>fred</code> his value is 5, and the second time his value is 7.</p>
+<p>This kind of <strong>multiple assignment</strong> is the reason I described variables as a <em>container</em> for values. When you assign a value to a variable, you change the contents of the container, as shown in the figure:</p>
+<div class="figure">
+<img src="images/assign2.png" alt="Assigning values to a variable" />
+<p class="caption">Assigning values to a variable</p>
+</div>
+<p>When there are multiple assignments to a variable, it is especially important to distinguish between an assignment statement and a statement of equality. Because C++ uses the <code>=</code> symbol for assignment, it is tempting to interpret a statement like <code>a = b</code> as a statement of equality. It is not!</p>
+<p>First of all, equality is commutative, and assignment is not. For example, in mathematics if <code>a = 7</code> then <code>7 = a</code>. But in C++ the statement <code>a = 7;</code> is legal, and <code>7 = a;</code> is not.</p>
+<p>Furthermore, in mathematics, a statement of equality is true for all time. If <code>a = b</code> now, then <code>a</code> will always equal <code>b</code>. In C++, an assignment statement can make two variables equal, but they don't have to stay that way!</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">  <span class="dt">int</span> a = <span class="dv">5</span>;
+  <span class="dt">int</span> b = a;     <span class="co">// a and b are now equal</span>
+  a = <span class="dv">3</span>;         <span class="co">// a and b are no longer equal</span></code></pre></div>
+<p>The third line changes the value of <code>a</code> but it does not change the value of <code>b</code>, and so they are no longer equal. In many programming languages an alternate symbol is used for assignment, such as <code>&lt;-</code> or <code>:=</code>, in order to avoid confusion.</p>
+<p>Although multiple assignment is frequently useful, you should use it with caution. If the values of variables are changing constantly in different parts of the program, it can make the code difficult to read and debug.</p>
+<h2 id="iteration-1"><span class="header-section-number">7.3</span> Iteration</h2>
+<p>One of the things computers are often used for is the automation of repetitive tasks. Repeating identical or similar tasks without making errors is something that computers do well and people do poorly.</p>
+<p>The two features we are going to look at are the <code>while</code> statement and the <code>for</code> statement.</p>
+<h3 id="the-while-statement"><span class="header-section-number">7.3.1</span> The <code>while</code> statement</h3>
+<p>Using a <code>while</code> statement, we can write a <code>countdown</code> program:</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">void</span> countdown (<span class="dt">int</span> n) {
+  <span class="cf">while</span> (n &gt; <span class="dv">0</span>) {
+    cout &lt;&lt; n &lt;&lt; endl;
+    n = n<span class="dv">-1</span>;
+  }
+  cout &lt;&lt; <span class="st">&quot;Blastoff!&quot;</span> &lt;&lt; endl;
+}</code></pre></div>
+<p>You can almost read a <code>while</code> statement as if it were English. What this means is, &quot;While <code>n</code> is greater than zero, continue displaying the value of <code>n</code> and then reducing the value of <code>n</code> by 1. When you get to zero, output the word 'Blastoff!'&quot;</p>
+<p>More formally, the flow of execution for a <code>while</code> statement is as follows:</p>
+<ul>
+<li>Evaluate the condition in parentheses, yielding <code>true</code> or <code>false</code>.</li>
+<li>If the condition is false, exit the <code>while</code> statement and continue execution at the next statement.</li>
+<li>If the condition is true, execute each of the statements between the squiggly-braces, and then go back to step 1.</li>
+</ul>
+<p>This type of flow is called a <strong>loop</strong> because the third step loops back around to the top. Notice that if the condition is false the first time through the loop, the statements inside the loop are never executed. The statements inside the loop are called the <strong>body</strong> of the loop.</p>
+<div class="figure">
+<img src="images/for-loop.png" alt="Structure of a loop" />
+<p class="caption">Structure of a loop</p>
+</div>
+<p>The body of the loop should change the value of one or more variables so that, eventually, the condition becomes false and the loop terminates. Otherwise the loop will repeat forever, which is called an infinite loop. An endless source of amusement for computer scientists is the observation that the directions on shampoo, ``Lather, rinse, repeat,'' are an infinite loop.</p>
+<p>In the case of <code>countdown</code>, we can prove that the loop will terminate because we know that the value of <code>n</code> is finite, and we can see that the value of <code>n</code> gets smaller each time through the loop (each <strong>iteration</strong>), so eventually we have to get to zero. In other cases it is not so easy to tell:</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">void</span> sequence (<span class="dt">int</span> n) {
+  <span class="cf">while</span> (n != <span class="dv">1</span>) {
+    <span class="bu">std::</span>cout &lt;&lt; n &lt;&lt; <span class="bu">std::</span>endl;
+    <span class="cf">if</span> (n%<span class="dv">2</span> == <span class="dv">0</span>) {      <span class="co">// n is even</span>
+      n = n / <span class="dv">2</span>;
+    } <span class="cf">else</span> {             <span class="co">// n is odd</span>
+      n = n*<span class="dv">3</span> + <span class="dv">1</span>;
+    }
+  }
+}</code></pre></div>
+<p>The condition for this loop is <code>n != 1</code>, so the loop will continue until <code>n</code> is 1, which will make the condition false.</p>
+<p>At each iteration, the program outputs the value of <code>n</code> and then checks whether it is even or odd. If it is even, the value of <code>n</code> is divided by two. If it is odd, the value is replaced by <code>3n+1</code>. For example, if the starting value (the argument passed to <code>sequence</code>) is 3, the resulting sequence is <code>3, 10, 5, 16, 8, 4, 2, 1</code>.</p>
+<p>Since <code>n</code> sometimes increases and sometimes decreases, there is no obvious proof that <code>n</code> will ever reach 1, or that the program will terminate. For some particular values of <code>n</code>, we can prove termination. For example, if the starting value is a power of two, then the value of <code>n</code> will be even every time through the loop, until we get to 1. The previous example ends with such a sequence, starting with 16.</p>
+<p>Particular values aside, the interesting question is whether we can prove that this program terminates for <strong>all</strong> values of n. So far, no one has been able to prove it <strong>or</strong> disprove it!</p>
+<p>One of the things loops are good for is generating tabular data. For example, before computers were readily available, people had to calculate logarithms, sines and cosines, and other common mathematical functions by hand. To make that easier, there were books containing long tables where you could find the values of various functions. Creating these tables was slow and boring, and the result tended to be full of errors.</p>
+<p>When computers appeared on the scene, one of the initial reactions was, &quot;This is great! We can use the computers to generate the tables, so there will be no errors.&quot; That turned out to be true (mostly), but shortsighted. Soon thereafter computers and calculators were so pervasive that the tables became obsolete.</p>
+<p>Well, almost. It turns out that for some operations, computers use tables of values to get an approximate answer, and then perform computations to improve the approximation. In some cases, there have been errors in the underlying tables, most famously in the table the original Intel Pentium used to perform floating-point division.</p>
+<p>Although a &quot;log table&quot; is not as useful as it once was, it still makes a good example of iteration. The following program outputs a sequence of values in the left column and their logarithms in the right column:</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">double</span> x = <span class="fl">1.0</span>;
+<span class="cf">while</span> (x &lt; <span class="fl">10.0</span>) {
+  <span class="bu">std::</span>cout &lt;&lt; x &lt;&lt; <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span> &lt;&lt; log(x) &lt;&lt; <span class="bu">std::</span>endl;
+  x = x + <span class="fl">1.0</span>;
+}</code></pre></div>
+<p>The sequence <code>\t</code> represents a tab character. These sequences can be included anywhere in a string, although in these examples the sequence is the whole string.</p>
+<p>A tab character causes the cursor to shift to the right until it reaches one of the tab stops, which are normally every eight characters. As we will see in a minute, tabs are useful for making columns of text line up.</p>
+<p>The output of this program is</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dv">1</span>      <span class="dv">0</span>
+<span class="dv">2</span>      <span class="fl">0.693147</span>
+<span class="dv">3</span>      <span class="fl">1.09861</span>
+<span class="dv">4</span>      <span class="fl">1.38629</span>
+<span class="dv">5</span>      <span class="fl">1.60944</span>
+<span class="dv">6</span>      <span class="fl">1.79176</span>
+<span class="dv">7</span>      <span class="fl">1.94591</span>
+<span class="dv">8</span>      <span class="fl">2.07944</span>
+<span class="dv">9</span>      <span class="fl">2.19722</span></code></pre></div>
+<p>If these values seem odd, remember that the <code>log</code> function uses base <span class="math inline">\(e\)</span>. Since powers of two are so important in computer science, we often want to find logarithms with respect to base 2. To do that, we can use the following formula:</p>
+<p><span class="math display">\[
+\log_2 x = \frac {log_e x}{log_e 2}
+\]</span></p>
+<p>Changing the output statement to</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="bu">std::</span>cout &lt;&lt; x &lt;&lt; <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span> &lt;&lt; log(x) / log(<span class="fl">2.0</span>) &lt;&lt; <span class="bu">std::</span>endl;</code></pre></div>
+<p>yields</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dv">1</span>      <span class="dv">0</span>
+<span class="dv">2</span>      <span class="dv">1</span>
+<span class="dv">3</span>      <span class="fl">1.58496</span>
+<span class="dv">4</span>      <span class="dv">2</span>
+<span class="dv">5</span>      <span class="fl">2.32193</span>
+<span class="dv">6</span>      <span class="fl">2.58496</span>
+<span class="dv">7</span>      <span class="fl">2.80735</span>
+<span class="dv">8</span>      <span class="dv">3</span>
+<span class="dv">9</span>      <span class="fl">3.16993</span></code></pre></div>
+<p>We can see that 1, 2, 4 and 8 are powers of two, because their logarithms base 2 are round numbers. If we wanted to find the logarithms of other powers of two, we could modify the program like this:</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">double</span> x = <span class="fl">1.0</span>;
+<span class="cf">while</span> (x &lt; <span class="fl">100.0</span>) {
+  <span class="bu">std::</span>cout &lt;&lt; x &lt;&lt; <span class="st">&quot;</span><span class="sc">\t</span><span class="st">&quot;</span> &lt;&lt; log(x) / log(<span class="fl">2.0</span>) &lt;&lt; <span class="bu">std::</span>endl;
+  x = x * <span class="fl">2.0</span>;
+}</code></pre></div>
+<p>Now instead of adding something to <code>x</code> each time through the loop, which yields an arithmetic sequence, we multiply <code>x</code> by something, yielding a <em>geometric sequence</em>. The result is:</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dv">1</span>      <span class="dv">0</span>
+<span class="dv">2</span>      <span class="dv">1</span>
+<span class="dv">4</span>      <span class="dv">2</span>
+<span class="dv">8</span>      <span class="dv">3</span>
+<span class="dv">16</span>     <span class="dv">4</span>
+<span class="dv">32</span>     <span class="dv">5</span>
+<span class="dv">64</span>     <span class="dv">6</span></code></pre></div>
+<p>Because we are using tab characters between the columns, the position of the second column does not depend on the number of digits in the first column.</p>
+<p>Log tables may not be useful any more, but for computer scientists, knowing the powers of two is! As an exercise, modify this program so that it outputs the powers of two up to 65536 (that's <span class="math inline">\(2^{16}\)</span>). Print it out and memorize it.</p>
+<h2 id="for-loops"><span class="header-section-number">7.4</span> <code>for</code> loops</h2>
+<p>The loops we have written so far have a number of elements in common. All of them start by initializing a variable; they have a test, or condition, that depends on that variable; and inside the loop they do something to that variable, like increment it.</p>
+<p>This type of loop is so common that there is an alternate loop statement, called <code>for</code>, that expresses it more concisely. The general syntax looks like this:</p>
+<pre><code>for (INITIALIZER; CONDITION; INCREMENTOR) {
+  BODY
+}</code></pre>
+<p>This statement is exactly equivalent to</p>
+<pre><code>INITIALIZER;
+while (CONDITION) {
+  BODY
+  INCREMENTOR
+}</code></pre>
+<p>except that it is more concise and, since it puts all the loop-related statements in one place, it is easier to read. For example:</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="cf">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; <span class="dv">4</span>; i++) {
+  <span class="bu">std::</span>cout &lt;&lt; count[i] &lt;&lt; <span class="bu">std::</span>endl;
+}</code></pre></div>
+<p>is equivalent to</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">int</span> i = <span class="dv">0</span>;
+<span class="cf">while</span> (i &lt; <span class="dv">4</span>) {
+  <span class="bu">std::</span>cout &lt;&lt; count[i] &lt;&lt; <span class="bu">std::</span>endl;
+  i++;
+}</code></pre></div>
+<p>We prefer for loops where the bounds are known, or when we iterate over a structure (see #lists). A <code>while</code> loop is preferred when we're waiting for some kind of event to happen.</p>
+<h2 id="what-we-can-now-do-5"><span class="header-section-number">7.5</span> What we can now do</h2>
+<p>We can now repeat instructions.</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span>
+
+<span class="dt">int</span> read_int() {
+  <span class="dt">int</span> val;
+  <span class="bu">std::</span>cin &gt;&gt; val;
+  <span class="cf">return</span> val;
+}
+
+<span class="dt">int</span> main() {
+  <span class="dt">int</span> fjd_amount;
+
+  <span class="bu">std::</span>cout &lt;&lt; <span class="st">&quot;Please enter an amount in FJD for conversion to EUR: &quot;</span>;
+  fjd_amount = read_int();
+
+  <span class="cf">while</span>(fjd_amount &lt; <span class="dv">0</span>) {
+    <span class="bu">std::</span>cout &lt;&lt; <span class="st">&quot;You have entered an amount less than zero, please retry: &quot;</span> &lt;&lt; <span class="bu">std::</span>endl;
+    fjd_amount = read_int();
+  } 
+
+  <span class="bu">std::</span>cout &lt;&lt; <span class="st">&quot;FJD$&quot;</span> &lt;&lt; fjd_amount &lt;&lt; <span class="st">&quot; is worth EUR&quot;</span> &lt;&lt; (fjd_amount * <span class="fl">0.4076</span>) &lt;&lt; <span class="bu">std::</span>endl;
+  <span class="cf">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+<h1 id="lists"><span class="header-section-number">8</span> Lists</h1>
+<h2 id="objective-7"><span class="header-section-number">8.1</span> Objective</h2>
+<p>In this chapter we introduce one type of list. The importance of lists in computer science cannot be understated.</p>
+<h2 id="a-vector"><span class="header-section-number">8.2</span> A <code>vector</code></h2>
+<p>A <strong>vector</strong> is a list of values where each value is identified by a number (called an index). The nice thing about vectors is that they can be made up of any type of element, including basic types like <code>int</code>s and <code>float</code>s.</p>
+<p>The <code>vector</code> type is defined in the C++ Standard Template Library (STL). In order to use it, you have to include the header file <code>vector</code>:</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="pp">#include </span><span class="im">&lt;vector&gt;</span></code></pre></div>
+<p>You can create a vector the same way you create other variable types:</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="bu">std::</span>vector&lt;<span class="dt">int</span>&gt; count;
+<span class="bu">std::</span>vector&lt;<span class="dt">float</span>&gt; floatVector;</code></pre></div>
+<p>The type that makes up the vector appears in angle brackets <code>&lt;</code> and <code>&gt;</code>. The first line creates a vector of integers named <code>count</code>; the second creates a vector of <code>float</code>s. Although these statements are legal, they are not very useful because they create vectors that have no elements (their size is zero). It is more common to specify the size of the vector in parentheses:</p>
+<pre><code>std::vector&lt;int&gt; count (4);</code></pre>
+<p>The syntax here is a little odd; it looks like a combination of a variable declarations and a function call. In fact, that's exactly what it is. The function we are invoking is an <code>vector</code> constructor. A <strong>constructor</strong> is a special function that creates new objects and initializes their instance variables. In this case, the constructor takes a single argument, which is the size of the new vector.</p>
+<p>The following figure shows how vectors are represented in state diagrams:</p>
+<div class="figure">
+<img src="images/vector.png" alt="Visualising a vector" />
+<p class="caption">Visualising a <code>vector</code></p>
+</div>
+<p>The large numbers inside the boxes are the <strong>elements</strong> of the vector. The small numbers outside the boxes are the indices used to identify each box. When you allocate a new vector, the elements are not initialized. They could contain any values.</p>
+<p>There is another constructor for <code>vector</code>s that takes two parameters; the second is a &quot;fill value,&quot; the value that will be assigned to each of the elements.</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="bu">std::</span>vector&lt;<span class="dt">int</span>&gt; count (<span class="dv">4</span>, <span class="dv">0</span>);</code></pre></div>
+<p>This statement creates a vector of four elements and initializes all of them to zero.</p>
+<h2 id="accessing-elements"><span class="header-section-number">8.3</span> Accessing elements</h2>
+<p>The <code>[]</code> operator reads and writes the elements of a vector in much the same way it accesses the characters in an <code>string</code>. As with <code>string</code>s, the indices start at zero, so <code>count[0]</code> refers to the &quot;zeroeth&quot; element of the vector, and <code>count[1]</code> refers to the &quot;oneth&quot; element. You can use the <code>[]</code> operator anywhere in an expression:</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">count[<span class="dv">0</span>] = <span class="dv">7</span>;
+count[<span class="dv">1</span>] = count[<span class="dv">0</span>] * <span class="dv">2</span>;
+count[<span class="dv">2</span>]++;
+count[<span class="dv">3</span>] -= <span class="dv">60</span>;</code></pre></div>
+<p>All of these are legal assignment statements. Here is the effect of this code fragment:</p>
+<div class="figure">
+<img src="images/vector2.png" alt="An example vector" />
+<p class="caption">An example vector</p>
+</div>
+<p>Since elements of this vector are numbered from 0 to 3, there is no element with the index 4. It is a common error to go beyond the bounds of a vector, which causes a run-time error. The program outputs an error message like &quot;Illegal vector index&quot;, and then quits.</p>
+<p>You can use any expression as an index, as long as it has type <code>int</code>. One of the most common ways to index a vector is with a loop variable. For example:</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">int</span> i = <span class="dv">0</span>;
+<span class="cf">while</span> (i &lt; <span class="dv">4</span>) {
+  <span class="bu">std::</span>cout &lt;&lt; count[i] &lt;&lt; <span class="bu">std::</span>endl;
+  i++;
+}</code></pre></div>
+<p>This <code>while</code> loop counts from 0 to 4; when the loop variable <code>i</code> is 4, the condition fails and the loop terminates. Thus, the body of the loop is only executed when <code>i</code> is 0, 1, 2 and 3.</p>
+<p>Each time through the loop we use <code>i</code> as an index into the vector, outputting the <code>i</code>th element. This type of vector traversal is very common.</p>
+<h2 id="better-iteration"><span class="header-section-number">8.4</span> Better Iteration</h2>
+<p>The C++11 standard added some syntax that allows more straightforward <code>for</code> loops to be written over vectors. An example of a C++11 for loop is the following:</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="cf">for</span>(<span class="kw">auto</span> c: count) {
+  <span class="bu">std::</span>cout &lt;&lt; c &lt;&lt; <span class="bu">std::</span>endl;
+}</code></pre></div>
+<p>Here we see that</p>
+<ul>
+<li>the syntax of a <code>for</code> loop has been simplified, and</li>
+<li>the use of the <code>auto</code> keyword to deduce the type of <code>c</code>.</li>
+</ul>
+<p>The advantage of this newer notation is that we cannot overstep the boundary of the <code>count</code> vector. Suppose <code>count</code> contains <span class="math inline">\(5\)</span> elements. Using the older notation we could write</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">  <span class="cf">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; <span class="dv">6</span>; i++) {
+    <span class="bu">std::</span>cout &lt;&lt; count[i] &lt;&lt; <span class="bu">std::</span>endl;
+  }</code></pre></div>
+<p>which is incorrect as it tries to access <code>count[5]</code> which is not an element <code>count</code>. The new notation protects us programmers from making such common errors (yes really! you'd be surprised how often these off-by-one errors are made).</p>
+<h2 id="copying-vectors"><span class="header-section-number">8.5</span> Copying vectors</h2>
+<p>There is one more constructor for <code>vector</code>s, which is called a copy constructor because it takes one <code>vector</code> as an argument and creates a new vector that is the same size, with the same elements.</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">  vector&lt;<span class="dt">int</span>&gt; copy (count);</code></pre></div>
+<p>Although this syntax is legal, it is almost never used for <code>vector</code>s because there is a better alternative:</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">  vector&lt;<span class="dt">int</span>&gt; copy = count;</code></pre></div>
+<p>The <code>=</code> operator works on <code>vector</code>s in pretty much the way you would expect.</p>
+<h2 id="vector-size"><span class="header-section-number">8.6</span> Vector size</h2>
+<p>There are a few functions you can invoke on an <code>vector</code>. One of them is very useful, though: <code>size()</code>. Not surprisingly, it returns the size of the vector (the number of elements).</p>
+<p>It is a good idea to use this value as the upper bound of a loop, rather than a constant. That way, if the size of the vector changes, you won't have to go through the program changing all the loops; they will work correctly for any size vector.</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">  <span class="cf">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; count.size(); i++) {
+    cout &lt;&lt; count[i] &lt;&lt; endl;
+  }</code></pre></div>
+<p>Though you should use the {#better itreration} example above to iterate over a vector.</p>
+<p>The last time the body of the loop gets executed, the value of <code>i</code> is <code>count.size() - 1</code>, which is the index of the last element. When <code>i</code> is equal to <code>count.size()</code>, the condition fails and the body is not executed, which is a good thing, since it would cause a run-time error.</p>
+<h2 id="vector-functions"><span class="header-section-number">8.7</span> Vector functions</h2>
+<p>The best feature of a vector is its resizeability A vector, once declared, can be resized from anywhere within the program. Suppose we have a situation where we input numbers from the user and store them in a vector till he inputs <code>-1</code>, and then display them. In such a case, we do not know the size of the vector beforehand. So we need wish add new values to the end of a vector as the user inputs them. We can use then vector function <code>push\_back()</code> for that purpose.</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">  <span class="pp">#include</span><span class="im">&lt;iostream&gt;</span>
+  <span class="pp">#include</span><span class="im">&lt;vector&gt;</span>
+
+  <span class="kw">using</span> <span class="kw">namespace</span> std;
+  <span class="dt">int</span> main()
+  {
+    vector&lt;<span class="dt">int</span>&gt; values;
+    <span class="dt">int</span> c,i,len;
+    cin &gt;&gt; c;
+    
+    <span class="cf">while</span>(c != <span class="dv">-1</span>) {
+      values.push_back(c);
+      cin &gt;&gt; c;
+    }
+
+    <span class="cf">for</span>(<span class="kw">auto</span> i: values) {
+      cout &lt;&lt; i &lt;&lt; endl;
+    }
+  }</code></pre></div>
+<h2 id="what-we-can-now-do-6"><span class="header-section-number">8.8</span> What we can now do</h2>
+<p>We can now create a list of values and perform operations on the list:</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span>
+<span class="pp">#include </span><span class="im">&lt;vector&gt;</span>
+
+<span class="dt">int</span> main() {
+  <span class="bu">std::</span>vector&lt;<span class="dt">int</span>&gt; fjd_amounts;
+  <span class="bu">std::</span>vector&lt;<span class="dt">int</span>&gt; eur_amounts;
+
+  fjd_amounts.push_back(<span class="dv">0</span>);
+  fjd_amounts.push_back(<span class="dv">1</span>);
+  fjd_amounts.push_back(<span class="dv">2</span>);
+  fjd_amounts.push_back(<span class="dv">4</span>);
+  fjd_amounts.push_back(<span class="dv">8</span>);
+
+  <span class="cf">for</span>(<span class="dt">int</span> fjd: fjd_amounts) {
+    eur_amounts.push_back(fjd * <span class="fl">0.4076</span>);
+  }
+  
+  <span class="bu">std::</span>cout &lt;&lt; eur_amounts &lt;&lt; <span class="bu">std::</span>endl;
+  <span class="cf">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+<h1 id="random-numbers"><span class="header-section-number">9</span> Random numbers</h1>
+<h2 id="objective-8"><span class="header-section-number">9.1</span> Objective</h2>
+<p>For many practical applications we need to use some randomness. We look at generating random numbers in C++.</p>
+<h2 id="determinsm"><span class="header-section-number">9.2</span> Determinsm</h2>
+<p>Most computer programs do the same thing every time they are executed, so they are said to be <strong>deterministic</strong>. Usually, determinism is a good thing, since we expect the same calculation to yield the same result. For some applications, though, we would like the computer to be unpredictable. Games are an obvious example.</p>
+<p>Making a program truly <strong>nondeterministic</strong> turns out to be not so easy, but there are ways to make it at least seem nondeterministic. One of them is to generate {pseudorandom} numbers and use them to determine the outcome of the program. Pseudorandom numbers are not truly random in the mathematical sense, but for our purposes, they will do.</p>
+<p>C++ provides a function called <code>random</code> that generates pseudorandom numbers. It is declared in the header file <code>cstdlib</code>, which contains a variety of ``standard library'' functions, hence the name.</p>
+<p>The return value from <code>random</code> is an integer between <code>0</code> and <code>RAND_MAX</code>, where <code>RAND_MAX</code> is a large number (about 2 billion on my computer) also defined in the header file. Each time you call <code>random</code> you get a different randomly-generated number. To see a sample, run this loop:</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span>
+<span class="pp">#include </span><span class="im">&lt;cstdlib&gt;</span>
+<span class="kw">using</span> <span class="kw">namespace</span> std;
+
+<span class="dt">int</span> main ()
+{
+  <span class="cf">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i &lt; <span class="dv">4</span>; i++) {
+    <span class="dt">int</span> x = random ();
+    cout &lt;&lt; x &lt;&lt; endl;
+  }
+  <span class="cf">return</span> <span class="dv">0</span>;
+}
+
+  </code></pre></div>
+<p>On my machine I got the following output:</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dv">1804289383</span>
+<span class="dv">846930886</span>
+<span class="dv">1681692777</span>
+<span class="dv">1714636915</span></code></pre></div>
+<p>You will probably get something similar, but different, on yours.</p>
+<p>Of course, we don't always want to work with gigantic integers. More often we want to generate integers between 0 and some upper bound. A simple way to do that is with the modulus operator. For example:</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">  <span class="dt">int</span> x = random ();
+  <span class="dt">int</span> y = x % upperBound;</code></pre></div>
+<p>Since <code>y</code> is the remainder when <code>x</code> is divided by <code>upperBound</code>, the only possible values for <code>y</code> are between 0 and <code>upperBound - 1</code>, including both end points. Keep in mind, though, that <code>y</code> will never be equal to <code>upperBound</code>.</p>
+<p>It is also frequently useful to generate random floating-point values. A common way to do that is by dividing by <code>RAND_MAX</code>. For example:</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">  <span class="dt">int</span> x = random ();
+  <span class="dt">double</span> y = <span class="dt">double</span>(x) / RAND_MAX;</code></pre></div>
+<p>This code sets <code>y</code> to a random value between 0.0 and 1.0, including both end points. As an exercise, you might want to think about how to generate a random floating-point value in a given range; for example, between 100.0 and 200.0.</p>
+<h2 id="statistics"><span class="header-section-number">9.3</span> Statistics</h2>
+<p>The numbers generated by <code>random</code> are supposed to be distributed uniformly. That means that each value in the range should be equally likely. If we count the number of times each value appears, it should be roughly the same for all values, provided that we generate a large number of values.</p>
+<p>In the next few sections, we will write programs that generate a sequence of random numbers and check whether this property holds true.</p>
+<h3 id="vector-of-random-numbers"><span class="header-section-number">9.3.1</span> Vector of random numbers</h3>
+<p>The first step is to generate a large number of random values and store them in a vector. By ``large number,'' of course, I mean 20. It's always a good idea to start with a manageable number, to help with debugging, and then increase it later.</p>
+<p>The following function takes a single argument, the size of the vector. It allocates a new vector of <code>int</code>s, and fills it with random values between 0 and <code>upperBound-1</code>.</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">vector&lt;<span class="dt">int</span>&gt; randomVector (<span class="dt">int</span> n, <span class="dt">int</span> upperBound) {
+  vector&lt;<span class="dt">int</span>&gt; vec (n);
+  <span class="cf">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i&lt;vec.size(); i++) {
+    vec[i] = random () % upperBound;
+  }
+  <span class="cf">return</span> vec;
+}</code></pre></div>
+<p>The return type is <code>vector&lt;int&gt;</code>, which means that this function returns a vector of integers. To test this function, it is convenient to have a function that outputs the contents of a vector.</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">void</span> printVector (<span class="at">const</span> vector&lt;<span class="dt">int</span>&gt;&amp; vec) {
+  <span class="cf">for</span> (<span class="dt">int</span> i: vec) {
+    cout &lt;&lt; i &lt;&lt; <span class="st">&quot; &quot;</span>;
+  }
+}</code></pre></div>
+<p>Notice that it is legal to pass <code>vector</code>s by reference. In fact it is quite common, since it makes it unnecessary to copy the vector. Since <code>printVector</code> does not modify the vector, we declare the parameter <code>const</code>.</p>
+<p>The following code generates a vector and outputs it:</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">  <span class="dt">int</span> numValues = <span class="dv">20</span>;
+  <span class="dt">int</span> upperBound = <span class="dv">10</span>;
+  vector&lt;<span class="dt">int</span>&gt; vector = randomVector (numValues, upperBound);
+  printVector (vector);</code></pre></div>
+<p>On my machine the output is</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dv">3</span> <span class="dv">6</span> <span class="dv">7</span> <span class="dv">5</span> <span class="dv">3</span> <span class="dv">5</span> <span class="dv">6</span> <span class="dv">2</span> <span class="dv">9</span> <span class="dv">1</span> <span class="dv">2</span> <span class="dv">7</span> <span class="dv">0</span> <span class="dv">9</span> <span class="dv">3</span> <span class="dv">6</span> <span class="dv">0</span> <span class="dv">6</span> <span class="dv">2</span> <span class="dv">6</span> </code></pre></div>
+<p>which is pretty random-looking. Your results may differ.</p>
+<p>If these numbers are really random, we expect each digit to appear the same number of times---twice each. In fact, the number 6 appears five times, and the numbers 4 and 8 never appear at all.</p>
+<p>Do these results mean the values are not really uniform? It's hard to tell. With so few values, the chances are slim that we would get exactly what we expect. But as the number of values increases, the outcome should be more predictable.</p>
+<p>To test this theory, we'll write some programs that count the number of times each value appears, and then see what happens when we increase <code>numValues</code>.</p>
+<h3 id="counting"><span class="header-section-number">9.3.2</span> Counting</h3>
+<p>A good approach to problems like this is to think of simple functions that are easy to write, and that might turn out to be useful. Then you can combine them into a solution. This approach is sometimes called <strong>bottom-up design</strong>. Of course, it is not easy to know ahead of time which functions are likely to be useful, but as you gain experience you will have a better idea.</p>
+<p>Also, it is not always obvious what sort of things are easy to write, but a good approach is to look for subproblems that fit a pattern you have seen before.</p>
+<p>Back in Section {#loopcount} we looked at a loop that traversed a string and counted the number of times a given letter appeared. You can think of this program as an example of a pattern called ``traverse and count.'' The elements of this pattern are:</p>
+<ul>
+<li>A set or container that can be traversed, like a string or a vector.</li>
+<li>A test that you can apply to each element in the container.</li>
+<li>A counter that keeps track of how many elements pass the test.</li>
+</ul>
+<p>In this case, I have a function in mind called <code>howMany</code> that counts the number of elements in a vector that equal a given value. The parameters are the vector and the integer value we are looking for. The return value is the number of times the value appears.</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="dt">int</span> howMany (<span class="at">const</span> vector&lt;<span class="dt">int</span>&gt;&amp; vec, <span class="dt">int</span> value) {
+  <span class="dt">int</span> count = <span class="dv">0</span>;
+  <span class="cf">for</span> (<span class="dt">int</span> i: vec) {
+    <span class="cf">if</span> (i == value) {
+      count++;
+    }
+  }
+  <span class="cf">return</span> count;
+}</code></pre></div>
+<h3 id="checking-the-other-values"><span class="header-section-number">9.3.3</span> Checking the other values</h3>
+<p><code>howMany</code> only counts the occurrences of a particular value, and we are interested in seeing how many times each value appears. We can solve that problem with a loop:</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">  <span class="dt">int</span> numValues = <span class="dv">20</span>;
+  <span class="dt">int</span> upperBound = <span class="dv">10</span>;
+  vector&lt;<span class="dt">int</span>&gt; vector = randomVector (numValues, upperBound);
+
+  cout &lt;&lt; <span class="st">&quot;value</span><span class="sc">\t</span><span class="st">howMany&quot;</span>;
+
+  <span class="cf">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i&lt;upperBound; i++) {
+    cout &lt;&lt; i &lt;&lt; <span class="st">&#39;</span><span class="sc">\t</span><span class="st">&#39;</span> &lt;&lt; howMany (vector, i) &lt;&lt; endl;
+  }</code></pre></div>
+<p>Notice that it is legal to declare a variable inside a <code>for</code> statement. This syntax is sometimes convenient, but you should be aware that a variable declared inside a loop only exists inside the loop. If you try to refer to <code>i</code> later, you will get a compiler error.</p>
+<p>This code uses the loop variable as an argument to <code>howMany</code>, in order to check each value between 0 and 9, in order. The result is:</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">value   howMany
+<span class="dv">0</span>       <span class="dv">2</span>
+<span class="dv">1</span>       <span class="dv">1</span>
+<span class="dv">2</span>       <span class="dv">3</span>
+<span class="dv">3</span>       <span class="dv">3</span>
+<span class="dv">4</span>       <span class="dv">0</span>
+<span class="dv">5</span>       <span class="dv">2</span>
+<span class="dv">6</span>       <span class="dv">5</span>
+<span class="dv">7</span>       <span class="dv">2</span>
+<span class="dv">8</span>       <span class="dv">0</span>
+<span class="dv">9</span>       <span class="dv">2</span></code></pre></div>
+<p>Again, it is hard to tell if the digits are really appearing equally often. If we increase <code>numValues</code> to 100,000 we get the following:</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">value   howMany
+<span class="dv">0</span>       <span class="dv">10130</span>
+<span class="dv">1</span>       <span class="dv">10072</span>
+<span class="dv">2</span>       <span class="dv">9990</span>
+<span class="dv">3</span>       <span class="dv">9842</span>
+<span class="dv">4</span>       <span class="dv">10174</span>
+<span class="dv">5</span>       <span class="dv">9930</span>
+<span class="dv">6</span>       <span class="dv">10059</span>
+<span class="dv">7</span>       <span class="dv">9954</span>
+<span class="dv">8</span>       <span class="dv">9891</span>
+<span class="dv">9</span>       <span class="dv">9958</span></code></pre></div>
+<p>In each case, the number of appearances is within about 1% of the expected value (10,000), so we conclude that the random numbers are probably uniform.</p>
+<h3 id="a-histogram"><span class="header-section-number">9.3.4</span> A histogram</h3>
+<p>It is often useful to take the data from the previous tables and store them for later access, rather than just print them. What we need is a way to store 10 integers. We could create 10 integer variables with names like <code>howManyOnes</code>, <code>howManyTwos</code>, etc. But that would require a lot of typing, and it would be a real pain later if we decided to change the range of values.</p>
+<p>A better solution is to use a vector with size 10. That way we can create all ten storage locations at once and we can access them using indices, rather than ten different names. Here's how:</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">  <span class="dt">int</span> numValues = <span class="dv">100000</span>;
+  <span class="dt">int</span> upperBound = <span class="dv">10</span>;
+  vector&lt;<span class="dt">int</span>&gt; vector = randomVector (numValues, upperBound);
+  vector&lt;<span class="dt">int</span>&gt; histogram (upperBound);
+
+  <span class="cf">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i&lt;upperBound; i++) {
+    <span class="dt">int</span> count = howMany (vector, i);
+    histogram[i] = count;
+  }</code></pre></div>
+<p>I called the vector <code>histogram</code> because that's a statistical term for a vector of numbers that counts the number of appearances of a range of values.</p>
+<p>The tricky thing here is that I am using the loop variable in two different ways. First, it is an argument to {howMany}, specifying which value I am interested in. Second, it is an index into the histogram, specifying which location I should store the result in.</p>
+<h3 id="a-single-pass-solution"><span class="header-section-number">9.3.5</span> A single-pass solution</h3>
+<p>Although this code works, it is not as efficient as it could be. Every time it calls <code>howMany</code>, it traverses the entire vector. In this example we have to traverse the vector ten times!</p>
+<p>It would be better to make a single pass through the vector. For each value in the vector we could find the corresponding counter and increment it. In other words, we can use the value from the vector as an index into the histogram. Here's what that looks like:</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp">  vector&lt;<span class="dt">int</span>&gt; histogram (upperBound, <span class="dv">0</span>);
+
+  <span class="cf">for</span> (<span class="dt">int</span> i = <span class="dv">0</span>; i&lt;numValues; i++) {
+    <span class="dt">int</span> index = vector[i];
+    histogram[index]++;
+  }</code></pre></div>
+<p>The first line initializes the elements of the histogram to zeroes. That way, when we use the increment operator (<code>++</code>) inside the loop, we know we are starting from zero. Forgetting to initialize counters is a common error.</p>
+<p>As an exercise, encapsulate this code in a function called {histogram} that takes a vector and the range of values in the vector (in this case 0 through 10), and that returns a histogram of the values in the vector.</p>
+<h2 id="random-seeds"><span class="header-section-number">9.4</span> Random seeds</h2>
+<p>If you have run the code in this chapter a few times, you might have noticed that you are getting the same <em>random</em> values every time. That's not very random!</p>
+<p>One of the properties of pseudorandom number generators is that if they start from the same place they will generate the same sequence of values. The starting place is called a <strong>seed</strong>; by default, C++ uses the same seed every time you run the program.</p>
+<p>While you are debugging, it is often helpful to see the same sequence over and over. That way, when you make a change to the program you can compare the output before and after the change.</p>
+<p>If you want to choose a different seed for the random number generator, you can use the <code>srand</code> function. It takes a single argument, which is an integer between 0 and <code>RAND\_MAX</code>.</p>
+<h2 id="what-we-can-do-now-1"><span class="header-section-number">9.5</span> What we can do now</h2>
+<p>We can now create random numbers:</p>
+<div class="sourceCode"><pre class="sourceCode cpp"><code class="sourceCode cpp"><span class="pp">#include </span><span class="im">&lt;iostream&gt;</span>
+<span class="pp">#include </span><span class="im">&lt;cstdlib&gt;</span>
+
+<span class="dt">int</span> dice_roll() {
+  <span class="dt">int</span> number = (random() % <span class="dv">6</span>) + <span class="dv">1</span>;
+  <span class="cf">return</span> number;
+}
+
+<span class="dt">int</span> main() {
+  <span class="bu">std::</span>cout &lt;&lt; <span class="st">&quot;You roll a &quot;</span> &lt;&lt; dice_roll() &lt;&lt; <span class="bu">std::</span>endl;
+  <span class="cf">return</span> <span class="dv">0</span>;
+}</code></pre></div>
+<h1 id="provenance"><span class="header-section-number">10</span> Provenance</h1>
+<p>This book is based on &quot;How to think like a computer scientist&quot; which was originally developed in 1999 by Allen B. Downey. Allen is one of those amazingly productive people who shares under free-content licences. Because of his generosity, others contributed to the book over many years. These include Narendra Sisodiya, Tirtha P. Chatterjee and Aidan Delaney. This book is a derivative work of &quot;How to think...&quot; and was written to focus on motivation and examples that were of significance to students in South Pacific countries.</p>
+<h2 id="licence"><span class="header-section-number">10.1</span> Licence</h2>
+<p>As this book is a derivative work of Doweny's original, it must retain the same licencing terms. The terms of this licence, the GNU General Public Licence, were developed to ensure that you -- the reader -- have the same distribution rights as me -- the author. With this book you may</p>
+<ul>
+<li>make copies and share them with your friends,</li>
+<li>change the format of the book -- if you received it as a web page you're allowed to transform it into an ebook,</li>
+<li>make changes to the book once you provide those changes, under the same rights, to anyone who receives the book from you,</li>
+<li>you are allowed to profit from selling copies of the book, but again, you have to pass on the same rights to your customers.</li>
+</ul>
+<p>The text of the licence is quoted below</p>
+<h2 id="gnu-general-public-license"><span class="header-section-number">10.2</span> GNU GENERAL PUBLIC LICENSE</h2>
+<p>Version 2, June 1991</p>
+<p>Copyright (C) 1989, 1991 Free Software Foundation, Inc.<br />
+51 Franklin Street, Fifth Floor, Boston, MA 02110-1301, USA</p>
+<p>Everyone is permitted to copy and distribute verbatim copies of this license document, but changing it is not allowed.</p>
+<h3 id="preamble"><span class="header-section-number">10.2.1</span> Preamble</h3>
+<p>The licenses for most software are designed to take away your freedom to share and change it. By contrast, the GNU General Public License is intended to guarantee your freedom to share and change free software--to make sure the software is free for all its users. This General Public License applies to most of the Free Software Foundation's software and to any other program whose authors commit to using it. (Some other Free Software Foundation software is covered by the GNU Lesser General Public License instead.) You can apply it to your programs, too.</p>
+<p>When we speak of free software, we are referring to freedom, not price. Our General Public Licenses are designed to make sure that you have the freedom to distribute copies of free software (and charge for this service if you wish), that you receive source code or can get it if you want it, that you can change the software or use pieces of it in new free programs; and that you know you can do these things.</p>
+<p>To protect your rights, we need to make restrictions that forbid anyone to deny you these rights or to ask you to surrender the rights. These restrictions translate to certain responsibilities for you if you distribute copies of the software, or if you modify it.</p>
+<p>For example, if you distribute copies of such a program, whether gratis or for a fee, you must give the recipients all the rights that you have. You must make sure that they, too, receive or can get the source code. And you must show them these terms so they know their rights.</p>
+<p>We protect your rights with two steps: (1) copyright the software, and (2) offer you this license which gives you legal permission to copy, distribute and/or modify the software.</p>
+<p>Also, for each author's protection and ours, we want to make certain that everyone understands that there is no warranty for this free software. If the software is modified by someone else and passed on, we want its recipients to know that what they have is not the original, so that any problems introduced by others will not reflect on the original authors' reputations.</p>
+<p>Finally, any free program is threatened constantly by software patents. We wish to avoid the danger that redistributors of a free program will individually obtain patent licenses, in effect making the program proprietary. To prevent this, we have made it clear that any patent must be licensed for everyone's free use or not licensed at all.</p>
+<p>The precise terms and conditions for copying, distribution and modification follow.</p>
+<h3 id="terms-and-conditions-for-copying-distribution-and-modification"><span class="header-section-number">10.2.2</span> TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION</h3>
+<ol start="0" style="list-style-type: decimal">
+<li>This License applies to any program or other work which contains a notice placed by the copyright holder saying it may be distributed under the terms of this General Public License. The &quot;Program&quot;, below, refers to any such program or work, and a &quot;work based on the Program&quot; means either the Program or any derivative work under copyright law: that is to say, a work containing the Program or a portion of it, either verbatim or with modifications and/or translated into another language. (Hereinafter, translation is included without limitation in the term &quot;modification&quot;.) Each licensee is addressed as &quot;you&quot;.</li>
+</ol>
+<p>Activities other than copying, distribution and modification are not covered by this License; they are outside its scope. The act of running the Program is not restricted, and the output from the Program is covered only if its contents constitute a work based on the Program (independent of having been made by running the Program). Whether that is true depends on what the Program does.</p>
+<ol style="list-style-type: decimal">
+<li>You may copy and distribute verbatim copies of the Program's source code as you receive it, in any medium, provided that you conspicuously and appropriately publish on each copy an appropriate copyright notice and disclaimer of warranty; keep intact all the notices that refer to this License and to the absence of any warranty; and give any other recipients of the Program a copy of this License along with the Program.</li>
+</ol>
+<p>You may charge a fee for the physical act of transferring a copy, and you may at your option offer warranty protection in exchange for a fee.</p>
+<ol start="2" style="list-style-type: decimal">
+<li><p>You may modify your copy or copies of the Program or any portion of it, thus forming a work based on the Program, and copy and distribute such modifications or work under the terms of Section 1 above, provided that you also meet all of these conditions:</p>
+<ol style="list-style-type: lower-alpha">
+<li>You must cause the modified files to carry prominent notices stating that you changed the files and the date of any change.</li>
+<li>You must cause any work that you distribute or publish, that in whole or in part contains or is derived from the Program or any part thereof, to be licensed as a whole at no charge to all third parties under the terms of this License.</li>
+<li>If the modified program normally reads commands interactively when run, you must cause it, when started running for such interactive use in the most ordinary way, to print or display an announcement including an appropriate copyright notice and a notice that there is no warranty (or else, saying that you provide a warranty) and that users may redistribute the program under these conditions, and telling the user how to view a copy of this License. (Exception: if the Program itself is interactive but does not normally print such an announcement, your work based on the Program is not required to print an announcement.)</li>
+</ol></li>
+</ol>
+<p>These requirements apply to the modified work as a whole. If identifiable sections of that work are not derived from the Program, and can be reasonably considered independent and separate works in themselves, then this License, and its terms, do not apply to those sections when you distribute them as separate works. But when you distribute the same sections as part of a whole which is a work based on the Program, the distribution of the whole must be on the terms of this License, whose permissions for other licensees extend to the entire whole, and thus to each and every part regardless of who wrote it.</p>
+<p>Thus, it is not the intent of this section to claim rights or contest your rights to work written entirely by you; rather, the intent is to exercise the right to control the distribution of derivative or collective works based on the Program.</p>
+<p>In addition, mere aggregation of another work not based on the Program with the Program (or with a work based on the Program) on a volume of a storage or distribution medium does not bring the other work under the scope of this License.</p>
+<ol start="3" style="list-style-type: decimal">
+<li><p>You may copy and distribute the Program (or a work based on it, under Section 2) in object code or executable form under the terms of Sections 1 and 2 above provided that you also do one of the following:</p>
+<ol style="list-style-type: lower-alpha">
+<li>Accompany it with the complete corresponding machine-readable source code, which must be distributed under the terms of Sections 1 and 2 above on a medium customarily used for software interchange; or,</li>
+<li>Accompany it with a written offer, valid for at least three years, to give any third party, for a charge no more than your cost of physically performing source distribution, a complete machine-readable copy of the corresponding source code, to be distributed under the terms of Sections 1 and 2 above on a medium customarily used for software interchange; or,</li>
+<li>Accompany it with the information you received as to the offer to distribute corresponding source code. (This alternative is allowed only for noncommercial distribution and only if you received the program in object code or executable form with such an offer, in accord with Subsection b above.)</li>
+</ol></li>
+</ol>
+<p>The source code for a work means the preferred form of the work for making modifications to it. For an executable work, complete source code means all the source code for all modules it contains, plus any associated interface definition files, plus the scripts used to control compilation and installation of the executable. However, as a special exception, the source code distributed need not include anything that is normally distributed (in either source or binary form) with the major components (compiler, kernel, and so on) of the operating system on which the executable runs, unless that component itself accompanies the executable.</p>
+<p>If distribution of executable or object code is made by offering access to copy from a designated place, then offering equivalent access to copy the source code from the same place counts as distribution of the source code, even though third parties are not compelled to copy the source along with the object code.</p>
+<ol start="4" style="list-style-type: decimal">
+<li><p>You may not copy, modify, sublicense, or distribute the Program except as expressly provided under this License. Any attempt otherwise to copy, modify, sublicense or distribute the Program is void, and will automatically terminate your rights under this License. However, parties who have received copies, or rights, from you under this License will not have their licenses terminated so long as such parties remain in full compliance.</p></li>
+<li><p>You are not required to accept this License, since you have not signed it. However, nothing else grants you permission to modify or distribute the Program or its derivative works. These actions are prohibited by law if you do not accept this License. Therefore, by modifying or distributing the Program (or any work based on the Program), you indicate your acceptance of this License to do so, and all its terms and conditions for copying, distributing or modifying the Program or works based on it.</p></li>
+<li><p>Each time you redistribute the Program (or any work based on the Program), the recipient automatically receives a license from the original licensor to copy, distribute or modify the Program subject to these terms and conditions. You may not impose any further restrictions on the recipients' exercise of the rights granted herein. You are not responsible for enforcing compliance by third parties to this License.</p></li>
+<li><p>If, as a consequence of a court judgment or allegation of patent infringement or for any other reason (not limited to patent issues), conditions are imposed on you (whether by court order, agreement or otherwise) that contradict the conditions of this License, they do not excuse you from the conditions of this License. If you cannot distribute so as to satisfy simultaneously your obligations under this License and any other pertinent obligations, then as a consequence you may not distribute the Program at all. For example, if a patent license would not permit royalty-free redistribution of the Program by all those who receive copies directly or indirectly through you, then the only way you could satisfy both it and this License would be to refrain entirely from distribution of the Program.</p></li>
+</ol>
+<p>If any portion of this section is held invalid or unenforceable under any particular circumstance, the balance of the section is intended to apply and the section as a whole is intended to apply in other circumstances.</p>
+<p>It is not the purpose of this section to induce you to infringe any patents or other property right claims or to contest validity of any such claims; this section has the sole purpose of protecting the integrity of the free software distribution system, which is implemented by public license practices. Many people have made generous contributions to the wide range of software distributed through that system in reliance on consistent application of that system; it is up to the author/donor to decide if he or she is willing to distribute software through any other system and a licensee cannot impose that choice.</p>
+<p>This section is intended to make thoroughly clear what is believed to be a consequence of the rest of this License.</p>
+<ol start="8" style="list-style-type: decimal">
+<li><p>If the distribution and/or use of the Program is restricted in certain countries either by patents or by copyrighted interfaces, the original copyright holder who places the Program under this License may add an explicit geographical distribution limitation excluding those countries, so that distribution is permitted only in or among countries not thus excluded. In such case, this License incorporates the limitation as if written in the body of this License.</p></li>
+<li><p>The Free Software Foundation may publish revised and/or new versions of the General Public License from time to time. Such new versions will be similar in spirit to the present version, but may differ in detail to address new problems or concerns.</p></li>
+</ol>
+<p>Each version is given a distinguishing version number. If the Program specifies a version number of this License which applies to it and &quot;any later version&quot;, you have the option of following the terms and conditions either of that version or of any later version published by the Free Software Foundation. If the Program does not specify a version number of this License, you may choose any version ever published by the Free Software Foundation.</p>
+<ol start="10" style="list-style-type: decimal">
+<li>If you wish to incorporate parts of the Program into other free programs whose distribution conditions are different, write to the author to ask for permission. For software which is copyrighted by the Free Software Foundation, write to the Free Software Foundation; we sometimes make exceptions for this. Our decision will be guided by the two goals of preserving the free status of all derivatives of our free software and of promoting the sharing and reuse of software generally.</li>
+</ol>
+<h3 id="no-warranty"><span class="header-section-number">10.2.3</span> NO WARRANTY</h3>
+<ol start="11" style="list-style-type: decimal">
+<li><p>BECAUSE THE PROGRAM IS LICENSED FREE OF CHARGE, THERE IS NO WARRANTY FOR THE PROGRAM, TO THE EXTENT PERMITTED BY APPLICABLE LAW. EXCEPT WHEN OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS AND/OR OTHER PARTIES PROVIDE THE PROGRAM &quot;AS IS&quot; WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE PROGRAM IS WITH YOU. SHOULD THE PROGRAM PROVE DEFECTIVE, YOU ASSUME THE COST OF ALL NECESSARY SERVICING, REPAIR OR CORRECTION.</p></li>
+<li><p>IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING WILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MAY MODIFY AND/OR REDISTRIBUTE THE PROGRAM AS PERMITTED ABOVE, BE LIABLE TO YOU FOR DAMAGES, INCLUDING ANY GENERAL, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES ARISING OUT OF THE USE OR INABILITY TO USE THE PROGRAM (INCLUDING BUT NOT LIMITED TO LOSS OF DATA OR DATA BEING RENDERED INACCURATE OR LOSSES SUSTAINED BY YOU OR THIRD PARTIES OR A FAILURE OF THE PROGRAM TO OPERATE WITH ANY OTHER PROGRAMS), EVEN IF SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.</p></li>
+</ol>
+<p>END OF TERMS AND CONDITIONS</p>
+<div class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>This doesn't apply in Vanuatu as there is no income tax or corporation tax, but they are being introduced in the near future.<a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p>If you don't believe me on this, then have a look around and see how many students think I can't see them texting under a desk in your next class.<a href="#fnref2">↩</a></p></li>
+<li id="fn3"><p>The name <em>hangman</em> and drawing a gallows are pretty awful, but then again most kids are awful!<a href="#fnref3">↩</a></p></li>
+<li id="fn4"><p>A solicitor could write these rules in a different way. They could first formalise the definition of a turn and then describe the progress of the game as a series of turns. In any case the formalisation into legal language adds more complexity than the informal explanation.<a href="#fnref4">↩</a></p></li>
+<li id="fn5"><p>Assuming you're not already motivated by the huge salaries that programmers command! Or in the immortal words of MC Solaar &quot;Du cash-money... Une voiture rouge. Donne-moi tout ça sinon faut qu'tu bouges&quot;.<a href="#fnref5">↩</a></p></li>
+<li id="fn6"><p>You'll note that if this graph had a quick way of going from Suva to Lautoka but a slow way of getting from Lautoka to Suva, then there would be 6 combinations. We're dealing with the <em>undirected</em> case here.<a href="#fnref6">↩</a></p></li>
+<li id="fn7"><p>All Computer Scientists are awesome people. They're also very intelligent and witty individuals.<a href="#fnref7">↩</a></p></li>
+<li id="fn8"><p>Not to be confused with the Nerd Core rapper <a href="http://nerdcorerisingmovie.com/mc-plus.html">MC plus +</a>.<a href="#fnref8">↩</a></p></li>
+<li id="fn9"><p>Each of <a href="https://www.mozilla.org/en-US/firefox/new/">Firefox</a>, Chrome and Edge are largely written in C++.<a href="#fnref9">↩</a></p></li>
+<li id="fn10"><p>Both <a href="http://libreoffice.org/">Libreoffice Writer</a> and Microsoft Word are written in C++.<a href="#fnref10">↩</a></p></li>
+<li id="fn11"><p>By text messaging I mean <a href="https://en.wikipedia.org/wiki/SMS">Short Message Service (SMS)</a><a href="#fnref11">↩</a></p></li>
+<li id="fn12"><p>Which also reminds Fijians of the last scoreline between Ireland and Fiji.<a href="#fnref12">↩</a></p></li>
+<li id="fn13"><p>If you're a maths person, the set of strings in programming form a Monoid under concatenation where the empty string is the identity value.<a href="#fnref13">↩</a></p></li>
+<li id="fn14"><p>This is one of the reasons that grumpy professors suspect plagiarism when two students hand up code with the same structure having only different variable and function names!<a href="#fnref14">↩</a></p></li>
+</ol>
+</div>
+</body>
+</html>
